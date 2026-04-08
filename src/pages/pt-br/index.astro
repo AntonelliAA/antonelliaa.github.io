@@ -1,0 +1,26 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import About from '../../components/About.astro';
+import Experience from '../../components/Experience.astro';
+import Projects from '../../components/Projects.astro';
+import Skills from '../../components/Skills.astro';
+import Education from '../../components/Education.astro';
+import Contact from '../../components/Contact.astro';
+
+const lang = 'pt-br' as const;
+---
+
+<Layout
+  lang={lang}
+  title="Anthony Antonelli — Desenvolvedor iOS & Engenheiro de Software"
+  description="Portfólio de Anthony Antonelli Andrade. Desenvolvedor iOS especializado em Swift & SwiftUI. Publicado na App Store com experiência em desenvolvimento fullstack."
+>
+  <Hero lang={lang} />
+  <About lang={lang} />
+  <Experience lang={lang} />
+  <Projects lang={lang} />
+  <Skills lang={lang} />
+  <Education lang={lang} />
+  <Contact lang={lang} />
+</Layout>

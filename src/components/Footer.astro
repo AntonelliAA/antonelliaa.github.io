@@ -1,0 +1,47 @@
+---
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <p class="footer__copy">
+        © {year} · {t('footer.built')} <a href="https://astro.build" target="_blank" rel="noopener" class="footer__astro">Astro</a> {t('footer.by')}
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: 2rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer__inner {
+    text-align: center;
+  }
+
+  .footer__copy {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+
+  .footer__astro {
+    color: var(--accent-light);
+    transition: color var(--transition-fast);
+  }
+
+  .footer__astro:hover {
+    color: var(--accent);
+  }
+</style>

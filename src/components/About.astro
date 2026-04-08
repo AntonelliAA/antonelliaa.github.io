@@ -1,0 +1,91 @@
+---
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const highlights = [
+  { icon: '🎮', title: t('about.highlight.appstore'), desc: t('about.highlight.appstore.desc') },
+  { icon: '🏆', title: t('about.highlight.hackathon'), desc: t('about.highlight.hackathon.desc') },
+  { icon: '💼', title: t('about.highlight.experience'), desc: t('about.highlight.experience.desc') },
+  { icon: '🌍', title: t('about.highlight.international'), desc: t('about.highlight.international.desc') },
+];
+---
+
+<section class="section about" id="about">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">— {t('about.label')}</span>
+      <h2 class="section-title">{t('about.title')}</h2>
+    </div>
+
+    <div class="about__content reveal">
+      <p class="about__text">{t('about.p1')}</p>
+      <p class="about__text">{t('about.p2')}</p>
+    </div>
+
+    <div class="about__highlights">
+      {highlights.map((h, i) => (
+        <div class="about__card card reveal" style={`transition-delay: ${i * 80}ms`}>
+          <span class="about__card-icon">{h.icon}</span>
+          <h3 class="about__card-title">{h.title}</h3>
+          <p class="about__card-desc">{h.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .about__content {
+    max-width: 640px;
+    margin-bottom: 3rem;
+  }
+
+  .about__text {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .about__highlights {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .about__card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .about__card-icon {
+    font-size: 1.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .about__card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .about__card-desc {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 600px) {
+    .about__highlights {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

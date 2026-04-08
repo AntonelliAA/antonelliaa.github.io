@@ -1,0 +1,196 @@
+---
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const experiences = [
+  {
+    icon: '📱',
+    role: t('exp.1.role'),
+    company: t('exp.1.company'),
+    period: t('exp.1.period'),
+    bullets: [t('exp.1.b1'), t('exp.1.b2'), t('exp.1.b3'), t('exp.1.b4')],
+    current: true,
+  },
+  {
+    icon: '💻',
+    role: t('exp.2.role'),
+    company: t('exp.2.company'),
+    period: t('exp.2.period'),
+    bullets: [t('exp.2.b1'), t('exp.2.b2'), t('exp.2.b3')],
+    current: false,
+  },
+  {
+    icon: '🌐',
+    role: t('exp.3.role'),
+    company: t('exp.3.company'),
+    period: t('exp.3.period'),
+    bullets: [t('exp.3.b1'), t('exp.3.b2'), t('exp.3.b3')],
+    current: false,
+  },
+];
+---
+
+<section class="section experience" id="experience">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">— {t('exp.label')}</span>
+      <h2 class="section-title">{t('exp.title')}</h2>
+    </div>
+
+    <div class="exp__timeline">
+      {experiences.map((exp, i) => (
+        <div class="exp__item reveal" style={`transition-delay: ${i * 100}ms`}>
+          <div class="exp__line-container">
+            <div class={`exp__dot ${exp.current ? 'exp__dot--active' : ''}`}>
+              <span>{exp.icon}</span>
+            </div>
+            {i < experiences.length - 1 && <div class="exp__line"></div>}
+          </div>
+          <div class="exp__content card">
+            <div class="exp__header">
+              <div>
+                <h3 class="exp__role">{exp.role}</h3>
+                <p class="exp__company">{exp.company}</p>
+              </div>
+              <span class="exp__period">{exp.period}</span>
+            </div>
+            <ul class="exp__bullets">
+              {exp.bullets.map((b) => (
+                <li class="exp__bullet">{b}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .exp__timeline {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .exp__item {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .exp__line-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 40px;
+  }
+
+  .exp__dot {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+
+  .exp__dot--active {
+    border-color: var(--accent);
+    box-shadow: 0 0 12px rgba(247, 44, 37, 0.2);
+  }
+
+  .exp__line {
+    width: 2px;
+    flex: 1;
+    background: var(--border);
+    margin: 0;
+  }
+
+  .exp__content {
+    flex: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .exp__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .exp__role {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .exp__company {
+    font-size: 0.875rem;
+    color: var(--accent-light);
+    margin-top: 0.15rem;
+  }
+
+  .exp__period {
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+
+  .exp__bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .exp__bullet {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .exp__bullet::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  @media (max-width: 600px) {
+    .exp__line-container {
+      min-width: 32px;
+    }
+
+    .exp__dot {
+      width: 32px;
+      height: 32px;
+      font-size: 0.9rem;
+    }
+
+    .exp__item {
+      gap: 1rem;
+    }
+
+    .exp__header {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+  }
+</style>

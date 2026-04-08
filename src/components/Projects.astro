@@ -1,0 +1,91 @@
+---
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+import ProjectCard from './ProjectCard.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const projects = [
+  {
+    name: t('proj.1.name'),
+    description: t('proj.1.desc'),
+    stack: t('proj.1.stack'),
+    linkLabel: t('proj.1.link.label'),
+    linkUrl: 'https://apps.apple.com/br/app/rise-of-the-lich-king/id6760662821',
+  },
+  {
+    name: t('proj.2.name'),
+    description: t('proj.2.desc'),
+    stack: t('proj.2.stack'),
+    linkLabel: t('proj.2.link.label'),
+    linkUrl: 'https://apps.apple.com/br/app/odin-pedidos/id6755982771',
+  },
+  {
+    name: t('proj.3.name'),
+    description: t('proj.3.desc'),
+    stack: t('proj.3.stack'),
+    linkLabel: t('proj.3.link.label'),
+    linkUrl: 'https://apps.apple.com/br/app/boraa/id6752790553',
+  },
+  {
+    name: t('proj.4.name'),
+    description: t('proj.4.desc'),
+    stack: t('proj.4.stack'),
+    linkLabel: t('proj.4.link.label'),
+    linkUrl: 'https://tools.ages.pucrs.br/bah-plataforma-de-inova-o-de-caxias-do-sul/bah-wiki/-/wikis/home',
+  },
+  {
+    name: t('proj.5.name'),
+    description: t('proj.5.desc'),
+    stack: t('proj.5.stack'),
+    linkLabel: t('proj.5.link.label'),
+    linkUrl: 'https://tools.ages.pucrs.br/ludo-pets/wiki/-/wikis/home',
+  },
+];
+---
+
+<section class="section projects" id="projects">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">— {t('proj.label')}</span>
+      <h2 class="section-title">{t('proj.title')}</h2>
+      <p class="section-subtitle">{t('proj.subtitle')}</p>
+    </div>
+
+    <div class="projects__grid">
+      {projects.map((proj, i) => (
+        <ProjectCard
+          name={proj.name}
+          description={proj.description}
+          stack={proj.stack}
+          linkLabel={proj.linkLabel}
+          linkUrl={proj.linkUrl}
+          index={i}
+        />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .projects__grid > :global(:last-child:nth-child(odd)) {
+    grid-column: 1 / -1;
+  }
+
+  @media (max-width: 700px) {
+    .projects__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,156 @@
+---
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const categories = [
+  {
+    name: t('skills.ios'),
+    icon: '📱',
+    skills: ['Swift', 'SwiftUI', 'UIKit', 'Xcode', 'Core Data', 'SwiftData', 'StoreKit 2', 'XCTest', 'Swift Testing'],
+    span: 'span-2',
+  },
+  {
+    name: t('skills.mobile'),
+    icon: '📲',
+    skills: ['React Native', 'Expo', 'iOS Capabilities', 'Push Notifications'],
+    span: '',
+  },
+  {
+    name: t('skills.web'),
+    icon: '🌐',
+    skills: ['TypeScript', 'JavaScript', 'React', 'Node.js', 'Angular', 'PHP'],
+    span: '',
+  },
+  {
+    name: t('skills.data'),
+    icon: '🗄️',
+    skills: ['SQL', 'MySQL', 'PostgreSQL', 'AWS', 'Python', 'Power BI', 'SAP'],
+    span: '',
+  },
+  {
+    name: t('skills.arch'),
+    icon: '🏗️',
+    skills: ['MVVM', 'MVC', 'Clean Architecture', 'REST APIs', 'Database Modeling', 'Agile/Scrum'],
+    span: '',
+  },
+  {
+    name: t('skills.tools'),
+    icon: '🔧',
+    skills: ['Git', 'GitHub', 'Figma', 'CI/CD', 'DevOps', 'TestFlight', 'App Store Connect'],
+    span: 'span-full',
+  },
+];
+---
+
+<section class="section skills" id="skills">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">— {t('skills.label')}</span>
+      <h2 class="section-title">{t('skills.title')}</h2>
+    </div>
+
+    <div class="skills__grid">
+      {categories.map((cat, i) => (
+        <div class={`skills__category card reveal ${cat.span}`} style={`transition-delay: ${i * 80}ms`}>
+          <div class="skills__category-header">
+            <span class="skills__icon">{cat.icon}</span>
+            <h3 class="skills__category-name">{cat.name}</h3>
+          </div>
+          <div class="skills__tags">
+            {cat.skills.map((skill) => (
+              <span class="skills__tag">{skill}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .span-2 {
+    grid-column: span 2;
+  }
+
+  .span-full {
+    grid-column: 1 / -1;
+  }
+
+  .skills__category {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .skills__category-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .skills__icon {
+    font-size: 1.3rem;
+  }
+
+  .skills__category-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .skills__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .skills__tag {
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    padding: 0.3rem 0.7rem;
+    border-radius: var(--radius-full);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+  }
+
+  .skills__tag:hover {
+    border-color: var(--accent-light);
+    color: var(--accent-light);
+  }
+
+  @media (max-width: 768px) {
+    .skills__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .span-2 {
+      grid-column: span 1;
+    }
+
+    .span-full {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .skills__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

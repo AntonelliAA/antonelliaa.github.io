@@ -1,0 +1,94 @@
+---
+interface Props {
+  name: string;
+  description: string;
+  stack: string;
+  linkLabel: string;
+  linkUrl?: string;
+  index?: number;
+}
+
+const { name, description, stack, linkLabel, linkUrl = '#', index = 0 } = Astro.props;
+const stackItems = stack.split(', ');
+---
+
+<div class="pcard card reveal" style={`transition-delay: ${index * 100}ms`}>
+  <div class="pcard__header">
+    <h3 class="pcard__name">{name}</h3>
+    <a href={linkUrl} target="_blank" rel="noopener" class="pcard__link">
+      {linkLabel}
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+        <polyline points="15 3 21 3 21 9"/>
+        <line x1="10" y1="14" x2="21" y2="3"/>
+      </svg>
+    </a>
+  </div>
+
+  <p class="pcard__desc">{description}</p>
+
+  <div class="pcard__stack">
+    {stackItems.map((item) => (
+      <span class="pcard__tech">{item}</span>
+    ))}
+  </div>
+</div>
+
+<style>
+  .pcard {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .pcard__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .pcard__name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .pcard__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent-light);
+    transition: color var(--transition-fast);
+    white-space: nowrap;
+  }
+
+  .pcard__link:hover {
+    color: var(--accent);
+  }
+
+  .pcard__desc {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .pcard__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: auto;
+  }
+
+  .pcard__tech {
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-full);
+    background: rgba(247, 44, 37, 0.08);
+    color: var(--accent-light);
+    border: 1px solid rgba(247, 44, 37, 0.15);
+  }
+</style>
