@@ -2,9 +2,6 @@
    DESIGN SYSTEM — Anthony Antonelli Portfolio
    ============================================ */
 
-/* --- Google Fonts --- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
-
 /* --- CSS Reset --- */
 *,
 *::before,
@@ -21,7 +18,7 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', system-ui, sans-serif;
+  font-family: var(--font-sans);
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
@@ -64,9 +61,13 @@ button {
   --border: rgba(255, 255, 255, 0.08);
   --border-hover: rgba(255, 255, 255, 0.15);
 
-  /* Typography */
-  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', system-ui, sans-serif;
-  --font-mono: 'Fira Code', monospace;
+  /* Typography — native stacks only. No webfont request, no external origin.
+     On Apple platforms this resolves to SF Pro / SF Mono, which is a
+     deliberate choice for an iOS portfolio rather than a fallback. */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI',
+    system-ui, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, 'Cascadia Mono',
+    'Roboto Mono', Consolas, monospace;
 
   /* Spacing */
   --section-padding: 6rem 0;
