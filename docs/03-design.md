@@ -58,26 +58,33 @@ idênticas.
 - [ ] Afirmação não verificável em vez de fato específico
 - [ ] Foto de banco de imagem de gente diversa sorrindo em frente a notebook
 
-### Como o site atual pontua
+### Como o site pontua
 
-| Sinal | Presente? | Onde |
+Coluna "antes" é a auditoria original; "agora" é o estado depois das mudanças
+de agosto de 2026.
+
+| Sinal | Antes | Agora |
 |---|---|---|
-| Dark mode permanente | **sim** | `global.css` — não existe light mode |
-| Gradiente em texto | **sim** | `Hero.astro:99` — `hero__name` com `background-clip: text` |
-| Badge acima do H1 | **sim** | `Hero.astro:16-23` — três badges antes do nome |
-| Rótulo de seção em caixa alta | **sim** | `.section-label`, `text-transform: uppercase` |
-| Emoji no lugar de ícone | **sim** | `Skills.astro:17,22,27,33,39,45` — 📱📲🌐🗄️🏗️🔧 |
-| `border-radius` uniforme | parcial | tudo é 12px ou pill |
-| Inter | parcial | importado, mas SF Pro vem antes na cascata |
-| Roxo / gradiente roxo | não | vermelho, escolha própria |
-| Card com borda colorida numa aresta | não | — |
-| Faixa de estatística | não | — |
-| Contraste reprovando | não | `#8895A7` sobre `#0C1120` dá 6.2:1, passa AA |
-| Glassmorphism | não | — |
-| Headline vaga | não | o hero cita apps e números reais |
+| Dark mode permanente | sim | **não** — light mode + toggle, dark segue padrão |
+| Gradiente em texto | sim | **não** — `--gradient` removido do projeto |
+| Badge acima do H1 | sim | **não** — status foi para o header |
+| Rótulo de seção em caixa alta | sim | **não** — mono, caixa baixa, sem prefixo `—` |
+| Emoji no lugar de ícone | sim | **não** — removidos de Skills, About e Experience |
+| Cards de feature com ícone em cima | sim | **não** — About virou linhas com fio |
+| Inter | parcial | **não** — stack nativa, zero requisição externa |
+| `border-radius` uniforme | parcial | parcial — cards e pills seguem 12px/full |
+| Roxo / gradiente roxo | não | não |
+| Card com borda colorida numa aresta | não | não |
+| Faixa de estatística | não | não |
+| Glassmorphism | não | não |
+| Headline vaga | não | não |
+| Contraste reprovando | não | não — verificado no Lighthouse, 100 em a11y |
 
-**Sete sinais presentes, cinco ausentes.** O conteúdo é honesto e específico —
-esse é o ponto forte. A casca visual é que é genérica.
+**De sete sinais presentes para zero.** Restou um "parcial" no raio de borda,
+que é escolha estética e não sinal por si só.
+
+O que ainda não mudou: continua sem imagem de app. Enquanto isso não entrar, a
+página descreve produto em vez de mostrar.
 
 ---
 

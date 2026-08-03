@@ -2,6 +2,11 @@
 
 Estado avaliado: commit `cc50a20`, branch `main`.
 
+> **Status em 3 de agosto de 2026.** P0, P1 e P2 executados, exceto os itens
+> que dependem de arquivo que só você tem (screenshots, foto) ou de terceiro
+> (recomendação). Lighthouse desktop: **100 / 100 / 100 / 100** nas duas
+> páginas. O que falta está na seção [O que sobrou](#o-que-sobrou) no fim.
+
 ## Veredito curto
 
 O site está acima da média de portfolio de estudante. A base técnica é boa
@@ -85,14 +90,35 @@ Dois a três dias. Depois disso o site sustenta uma entrevista.
 | 23 | Notas técnicas / blog | Um post de 2025 parado é pior que nenhum post |
 | 24 | Vídeo curto do fluxo dos apps | Depois dos screenshots, não antes |
 
+## O que sobrou
+
+Tudo que não foi feito, e por quê.
+
+| # | Item | Por que não foi feito |
+|---|---|---|
+| 8 | Screenshots dos apps | Preciso dos arquivos. O código já aceita: jogue `rise-of-the-lich-king.png`, `odinpedidos.png` e `boraa.png` em `src/assets/projects/` e eles aparecem sem tocar em código. Instruções em [src/assets/projects/README.md](../src/assets/projects/README.md) |
+| 9 | Sua foto | Mesma coisa — preciso do arquivo |
+| 16 | Case study do odinPedidos | Depende de informação que só você tem: qual era a operação antes, por que React Native e não nativo, o que se perdeu nessa escolha |
+| 17 | Log de releases | Precisa de número de versão e data reais do App Store Connect. Inventar destruiria o único valor que a seção teria |
+| 21 | Recomendação nomeada | Depende de terceiro |
+| 22 | Redesign completo (direção clara) | Decisão sua. A rota alternativa da [Parte 3 do doc de design](03-design.md#parte-3--se-preferir-manter-o-dark) foi executada: o dark ficou, sem os sinais genéricos |
+| 23 | Blog / notas técnicas | Só começa se for manter |
+
+Três bullets de Experiência foram adensados sem número porque não havia número
+no material. Se você tiver, valem mais que qualquer mudança visual restante:
+
+- GPSET: quantas aplicações web, quantos usuários, quanto caiu o tempo de deploy
+- Boraa: quantos check-ins, quantos usuários no evento
+- Rise of the Lich King: downloads acumulados hoje, não só a primeira semana
+
 ## Ordem sugerida
 
-1. P0 inteiro numa sentada. É meio dia e tira defeito.
-2. Item 8 (screenshots) sozinho, antes de qualquer outro P1. É o que mais muda.
-3. Resto do P1.
+1. ~~P0 inteiro~~ — feito.
+2. **Item 8 (screenshots).** Agora é o único item que ainda muda o resultado
+   de forma grande, e virou trabalho de arrastar arquivo.
+3. Item 9 (foto).
 4. Item 16 (case study) quando tiver um fim de semana.
-5. Decidir sobre P3 item 22 só depois de ver o site com screenshots dentro —
-   pode ser que resolva sozinho.
+5. Decidir sobre o item 22 só depois de ver o site com screenshots dentro.
 
 ## Como medir
 
@@ -102,6 +128,17 @@ Antes e depois:
 npm run build && npm run preview
 npx lighthouse http://localhost:4321 --preset=desktop --view
 ```
+
+Resultado em 3 de agosto de 2026, nas duas páginas:
+
+| | Performance | Acessibilidade | Boas práticas | SEO |
+|---|---|---|---|---|
+| `/` | 100 | 100 | 100 | 100 |
+| `/pt-br/` | 100 | 100 | 100 | 100 |
+
+O Lighthouse pegou dois problemas de contraste que a inspeção manual não tinha
+pego: branco no botão primário dava 3.93:1, e o link do Astro no rodapé se
+distinguia só por cor. Vale rodar depois de qualquer mudança de cor.
 
 E o teste que importa mais que o Lighthouse: abra o site num celular, dê 20
 segundos para alguém que não te conhece, e pergunte o que a pessoa entendeu.
