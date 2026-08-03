@@ -9,6 +9,9 @@ export type Lang = keyof typeof languages;
 
 export const ui = {
   en: {
+    // Accessibility
+    'a11y.skip': 'Skip to content',
+
     // Nav
     'nav.about': 'About',
     'nav.experience': 'Experience',
@@ -133,6 +136,9 @@ export const ui = {
   },
 
   'pt-br': {
+    // Accessibility
+    'a11y.skip': 'Pular para o conteúdo',
+
     // Nav
     'nav.about': 'Sobre',
     'nav.experience': 'Experiência',
