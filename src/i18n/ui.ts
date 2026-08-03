@@ -104,13 +104,24 @@ export const ui = {
     // Skills
     'skills.label': 'Skills',
     'skills.title': 'Tech stack',
+    'skills.subtitle': 'What I use, and where I used it.',
 
-    'skills.ios': 'iOS & Apple',
-    'skills.mobile': 'Mobile',
-    'skills.web': 'Web & Backend',
-    'skills.data': 'Data & Cloud',
-    'skills.arch': 'Architecture',
-    'skills.tools': 'Tools',
+    'skills.group.apple': 'Apple platforms',
+    'skills.group.cross': 'Cross-platform & backend',
+
+    'skills.ctx.swift': '3 apps shipped to the App Store',
+    'skills.ctx.swiftui': 'Rise of the Lich King, Boraa',
+    'skills.ctx.uikit': 'myRates — PUCRS Hackathon, 3rd place',
+    'skills.ctx.storekit': 'In-app purchases running in production',
+    'skills.ctx.persistence': 'Local persistence across Academy projects',
+    'skills.ctx.mapkit': 'Location and check-in features in Boraa',
+
+    'skills.ctx.reactnative': 'odinPedidos — 50+ paying clients',
+    'skills.ctx.typescript': 'Mobile and web, 2+ years',
+    'skills.ctx.node': 'Backend routes for Boraa and Bah Inovação',
+    'skills.ctx.react': 'Fullstack web apps at GPSET',
+    'skills.ctx.sql': 'Schema design for Bah Inovação',
+    'skills.ctx.aws': 'Cloud deployments at Plugways Digital',
 
     // Education
     'edu.label': 'Education',
@@ -232,13 +243,24 @@ export const ui = {
     // Skills
     'skills.label': 'Skills',
     'skills.title': 'Stack técnica',
+    'skills.subtitle': 'O que eu uso, e onde eu usei.',
 
-    'skills.ios': 'iOS & Apple',
-    'skills.mobile': 'Mobile',
-    'skills.web': 'Web & Backend',
-    'skills.data': 'Dados & Cloud',
-    'skills.arch': 'Arquitetura',
-    'skills.tools': 'Ferramentas',
+    'skills.group.apple': 'Plataformas Apple',
+    'skills.group.cross': 'Cross-platform & backend',
+
+    'skills.ctx.swift': '3 apps publicados na App Store',
+    'skills.ctx.swiftui': 'Rise of the Lich King, Boraa',
+    'skills.ctx.uikit': 'myRates — Hackathon PUCRS, 3º lugar',
+    'skills.ctx.storekit': 'Compras in-app rodando em produção',
+    'skills.ctx.persistence': 'Persistência local nos projetos da Academy',
+    'skills.ctx.mapkit': 'Localização e check-in no Boraa',
+
+    'skills.ctx.reactnative': 'odinPedidos — 50+ clientes pagantes',
+    'skills.ctx.typescript': 'Mobile e web, 2+ anos',
+    'skills.ctx.node': 'Rotas backend do Boraa e Bah Inovação',
+    'skills.ctx.react': 'Aplicações web fullstack na GPSET',
+    'skills.ctx.sql': 'Modelagem de schema no Bah Inovação',
+    'skills.ctx.aws': 'Deploys cloud na Plugways Digital',
 
     // Education
     'edu.label': 'Educação',
