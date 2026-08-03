@@ -66,6 +66,9 @@ button {
   --accent: #F72C25;            /*  4.8:1 on bg-primary — AA  */
   --accent-rgb: 247, 44, 37;
   --accent-light: #F77C78;
+  /* Filled surfaces need a darker red than text does: white on --accent is
+     only 3.9:1. This one carries white at 5.1:1. */
+  --accent-strong: #D81E14;
   --success: #22C55E;
   --border: rgba(255, 255, 255, 0.08);
   --border-hover: rgba(255, 255, 255, 0.15);
@@ -110,6 +113,7 @@ button {
     --accent: #C1121F;          /*  6.0:1 on bg-primary — AA  */
     --accent-rgb: 193, 18, 31;
     --accent-light: #9B0D17;    /*  8.2:1 on bg-primary — AAA */
+    --accent-strong: #C1121F;   /*  white on it: 6.2:1 — AA   */
     --success: #15803D;
     --border: rgba(20, 22, 26, 0.12);
     --border-hover: rgba(20, 22, 26, 0.22);
@@ -128,6 +132,7 @@ button {
   --accent: #C1121F;
   --accent-rgb: 193, 18, 31;
   --accent-light: #9B0D17;
+  --accent-strong: #C1121F;
   --success: #15803D;
   --border: rgba(20, 22, 26, 0.12);
   --border-hover: rgba(20, 22, 26, 0.22);
@@ -220,7 +225,7 @@ button {
 }
 
 .btn-primary {
-  background: var(--accent);
+  background: var(--accent-strong);
   color: #fff;
 }
 
