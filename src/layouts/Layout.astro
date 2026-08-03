@@ -19,6 +19,31 @@ const {
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL('/og-image.jpg', Astro.site);
 
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Anthony Antonelli Andrade',
+  url: Astro.site?.href,
+  jobTitle: 'iOS Developer',
+  email: 'antonellia.dev@gmail.com',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Porto Alegre',
+    addressRegion: 'RS',
+    addressCountry: 'BR',
+  },
+  alumniOf: {
+    '@type': 'CollegeOrUniversity',
+    name: 'Pontifícia Universidade Católica do Rio Grande do Sul (PUCRS)',
+  },
+  knowsAbout: ['Swift', 'SwiftUI', 'UIKit', 'iOS Development', 'React Native', 'TypeScript', 'Node.js'],
+  knowsLanguage: ['pt-BR', 'en'],
+  sameAs: [
+    'https://github.com/AntonelliAA',
+    'https://linkedin.com/in/anthony-antonelli-andrade',
+  ],
+};
+
 // hreflang pairs — both locales are single pages, so these are static.
 const alternates = [
   { hreflang: 'en', href: new URL('/', Astro.site) },
@@ -61,6 +86,8 @@ const alternates = [
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} is:inline />
 
     <!-- Gates the scroll-reveal CSS. Without JS the content renders as-is. -->
     <script is:inline>
