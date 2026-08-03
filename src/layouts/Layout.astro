@@ -15,6 +15,16 @@ const {
   description = 'Portfolio of Anthony Antonelli Andrade. iOS Developer specializing in Swift & SwiftUI. App Store published developer with experience in fullstack web development.',
   lang = 'en',
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og-image.jpg', Astro.site);
+
+// hreflang pairs — both locales are single pages, so these are static.
+const alternates = [
+  { hreflang: 'en', href: new URL('/', Astro.site) },
+  { hreflang: 'pt-BR', href: new URL('/pt-br/', Astro.site) },
+  { hreflang: 'x-default', href: new URL('/', Astro.site) },
+];
 ---
 
 <!doctype html>
@@ -25,12 +35,19 @@ const {
     <meta name="description" content={description} />
     <meta name="author" content="Anthony Antonelli Andrade" />
 
+    <link rel="canonical" href={canonical} />
+    {alternates.map((alt) => (
+      <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
+    ))}
+
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://antonelliaa.github.io" />
-    <meta property="og:image" content="https://antonelliaa.github.io/og-image.jpg" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'pt-br' ? 'pt_BR' : 'en_US'} />
+    <meta property="og:locale:alternate" content={lang === 'pt-br' ? 'en_US' : 'pt_BR'} />
+    <meta property="og:image" content={ogImage} />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -40,7 +57,7 @@ const {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="https://antonelliaa.github.io/og-image.png" />
+    <meta name="twitter:image" content={ogImage} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
