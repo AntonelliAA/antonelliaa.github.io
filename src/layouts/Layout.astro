@@ -92,9 +92,18 @@ const alternates = [
 
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)} is:inline />
 
-    <!-- Gates the scroll-reveal CSS. Without JS the content renders as-is. -->
+    <!-- Runs before first paint. Gates the scroll-reveal CSS (without JS the
+         content renders as-is) and restores a saved theme so the page never
+         flashes the wrong palette. No saved choice means the CSS media query
+         decides, which is why nothing is written here by default. -->
     <script is:inline>
       document.documentElement.classList.add('js');
+      try {
+        const saved = localStorage.getItem('theme');
+        if (saved === 'light' || saved === 'dark') {
+          document.documentElement.setAttribute('data-theme', saved);
+        }
+      } catch {}
     </script>
   </head>
   <body>

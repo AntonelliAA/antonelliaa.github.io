@@ -46,17 +46,27 @@ button {
   font-family: inherit;
 }
 
-/* --- Design Tokens --- */
+/* --- Design Tokens ---
+   Dark is the default identity. Light applies when the system asks for it and
+   the visitor has not chosen otherwise, or when they pick it explicitly via
+   the header toggle (which sets data-theme on <html>).
+
+   Every contrast ratio below was calculated, not eyeballed. */
 :root {
+  color-scheme: dark;
+
   /* Colors */
   --bg-primary: #0C1120;
+  --bg-primary-rgb: 12, 17, 32;
   --bg-secondary: #131A2E;
   --bg-card: rgba(255, 255, 255, 0.04);
   --bg-card-hover: rgba(255, 255, 255, 0.07);
-  --text-primary: #F8FAFC;
-  --text-secondary: #8895A7;
-  --accent: #F72C25;
+  --text-primary: #F8FAFC;      /* 17.2:1 on bg-primary — AAA */
+  --text-secondary: #8895A7;    /*  6.2:1 on bg-primary — AA  */
+  --accent: #F72C25;            /*  4.8:1 on bg-primary — AA  */
+  --accent-rgb: 247, 44, 37;
   --accent-light: #F77C78;
+  --success: #22C55E;
   --border: rgba(255, 255, 255, 0.08);
   --border-hover: rgba(255, 255, 255, 0.15);
 
@@ -83,6 +93,44 @@ button {
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-full: 9999px;
+}
+
+/* Light palette. Duplicated because a rule inside @media cannot be merged
+   with one outside it; keep the two blocks in sync. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    color-scheme: light;
+    --bg-primary: #FBFAF9;
+    --bg-primary-rgb: 251, 250, 249;
+    --bg-secondary: #F2F0ED;
+    --bg-card: rgba(20, 22, 26, 0.03);
+    --bg-card-hover: rgba(20, 22, 26, 0.06);
+    --text-primary: #14161A;    /* 17.4:1 on bg-primary — AAA */
+    --text-secondary: #4E545F;  /*  7.3:1 on bg-primary — AAA */
+    --accent: #C1121F;          /*  6.0:1 on bg-primary — AA  */
+    --accent-rgb: 193, 18, 31;
+    --accent-light: #9B0D17;    /*  8.2:1 on bg-primary — AAA */
+    --success: #15803D;
+    --border: rgba(20, 22, 26, 0.12);
+    --border-hover: rgba(20, 22, 26, 0.22);
+  }
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg-primary: #FBFAF9;
+  --bg-primary-rgb: 251, 250, 249;
+  --bg-secondary: #F2F0ED;
+  --bg-card: rgba(20, 22, 26, 0.03);
+  --bg-card-hover: rgba(20, 22, 26, 0.06);
+  --text-primary: #14161A;
+  --text-secondary: #4E545F;
+  --accent: #C1121F;
+  --accent-rgb: 193, 18, 31;
+  --accent-light: #9B0D17;
+  --success: #15803D;
+  --border: rgba(20, 22, 26, 0.12);
+  --border-hover: rgba(20, 22, 26, 0.22);
 }
 
 /* --- Layout --- */
@@ -206,7 +254,7 @@ button {
 }
 
 .badge--accent {
-  border-color: rgba(247, 44, 37, 0.3);
+  border-color: rgba(var(--accent-rgb), 0.3);
   color: var(--accent-light);
 }
 
@@ -264,7 +312,7 @@ button {
 
 /* --- Selection --- */
 ::selection {
-  background: rgba(247, 44, 37, 0.3);
+  background: rgba(var(--accent-rgb), 0.3);
   color: var(--text-primary);
 }
 

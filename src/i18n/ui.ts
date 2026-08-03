@@ -14,6 +14,7 @@ export const ui = {
 
     // Header
     'header.status': 'Open to work',
+    'header.theme': 'Toggle light and dark theme',
 
     // Nav
     'nav.about': 'About',
@@ -153,6 +154,7 @@ export const ui = {
 
     // Header
     'header.status': 'Aberto a propostas',
+    'header.theme': 'Alternar tema claro e escuro',
 
     // Nav
     'nav.about': 'Sobre',
