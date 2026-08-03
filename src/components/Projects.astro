@@ -2,6 +2,7 @@
 import type { Lang } from '../i18n/ui';
 import { useTranslations } from '../i18n/utils';
 import ProjectCard from './ProjectCard.astro';
+import type { ImageMetadata } from 'astro';
 
 interface Props {
   lang: Lang;
@@ -10,8 +11,23 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-const projects = [
+// Screenshots are optional. Drop a file named <slug>.png into
+// src/assets/projects/ and it shows up; until then the card renders text-only.
+// See src/assets/projects/README.md.
+const shots = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/projects/*.{png,jpg,jpeg,webp}',
+  { eager: true }
+);
+
+function shotFor(slug: string): ImageMetadata | undefined {
+  const hit = Object.entries(shots).find(([p]) => p.split('/').pop()?.split('.')[0] === slug);
+  return hit?.[1].default;
+}
+
+// Shipped products carry the section. Coursework sits below in a smaller list.
+const shipped = [
   {
+    slug: 'rise-of-the-lich-king',
     name: t('proj.1.name'),
     description: t('proj.1.desc'),
     stack: t('proj.1.stack'),
@@ -19,6 +35,7 @@ const projects = [
     linkUrl: 'https://apps.apple.com/br/app/rise-of-the-lich-king/id6760662821',
   },
   {
+    slug: 'odinpedidos',
     name: t('proj.2.name'),
     description: t('proj.2.desc'),
     stack: t('proj.2.stack'),
@@ -26,12 +43,16 @@ const projects = [
     linkUrl: 'https://apps.apple.com/br/app/odin-pedidos/id6755982771',
   },
   {
+    slug: 'boraa',
     name: t('proj.3.name'),
     description: t('proj.3.desc'),
     stack: t('proj.3.stack'),
     linkLabel: t('proj.3.link.label'),
     linkUrl: 'https://apps.apple.com/br/app/boraa/id6752790553',
   },
+];
+
+const academic = [
   {
     name: t('proj.4.name'),
     description: t('proj.4.desc'),
@@ -57,34 +78,100 @@ const projects = [
       <p class="section-subtitle">{t('proj.subtitle')}</p>
     </div>
 
-    <div class="projects__grid">
-      {projects.map((proj, i) => (
+    <div class="projects__shipped">
+      {shipped.map((proj, i) => (
         <ProjectCard
           name={proj.name}
           description={proj.description}
           stack={proj.stack}
           linkLabel={proj.linkLabel}
           linkUrl={proj.linkUrl}
+          image={shotFor(proj.slug)}
+          imageAlt={`${proj.name} — ${t('proj.screenshot.alt')}`}
           index={i}
         />
+      ))}
+    </div>
+
+    <h3 class="projects__subhead reveal">{t('proj.academic')}</h3>
+
+    <div class="projects__academic">
+      {academic.map((proj, i) => (
+        <div class="acard reveal" style={`transition-delay: ${i * 80}ms`}>
+          <div class="acard__header">
+            <h4 class="acard__name">{proj.name}</h4>
+            <a href={proj.linkUrl} target="_blank" rel="noopener" class="acard__link">{proj.linkLabel} →</a>
+          </div>
+          <p class="acard__desc">{proj.description}</p>
+          <p class="acard__stack">{proj.stack}</p>
+        </div>
       ))}
     </div>
   </div>
 </section>
 
 <style>
-  .projects__grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+  .projects__subhead {
+    margin-top: 3.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
   }
 
-  .projects__grid > :global(:last-child:nth-child(odd)) {
-    grid-column: 1 / -1;
+  .projects__academic {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 3rem;
+  }
+
+  .acard {
+    padding: 1.25rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .acard__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .acard__name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .acard__link {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-light);
+    white-space: nowrap;
+    transition: color var(--transition-fast);
+  }
+
+  .acard__link:hover {
+    color: var(--accent);
+  }
+
+  .acard__desc {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+  }
+
+  .acard__stack {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    opacity: 0.75;
   }
 
   @media (max-width: 700px) {
-    .projects__grid {
+    .projects__academic {
       grid-template-columns: 1fr;
     }
   }

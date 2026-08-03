@@ -73,6 +73,8 @@ export const ui = {
     'proj.label': 'Projects',
     'proj.title': 'Things I\'ve built',
     'proj.subtitle': 'Focused on shipping real products and solving real problems.',
+    'proj.academic': 'Academic projects',
+    'proj.screenshot.alt': 'app screenshot',
 
     'proj.1.name': 'Rise of the Lich King',
     'proj.1.desc': 'iOS game built end-to-end — concept, UI/UX, game logic, StoreKit 2, and App Store submission. 100 downloads in the first week. Full product lifecycle ownership.',
@@ -210,6 +212,8 @@ export const ui = {
     'proj.label': 'Projetos',
     'proj.title': 'O que eu construí',
     'proj.subtitle': 'Focado em lançar produtos reais e resolver problemas reais.',
+    'proj.academic': 'Projetos acadêmicos',
+    'proj.screenshot.alt': 'captura de tela do app',
 
     'proj.1.name': 'Rise of the Lich King',
     'proj.1.desc': 'Jogo iOS construído do zero — conceito, UI/UX, lógica de jogo, StoreKit 2 e submissão à App Store. 100 downloads na primeira semana. Domínio completo do ciclo de vida do produto.',
