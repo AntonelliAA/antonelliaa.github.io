@@ -186,14 +186,16 @@ button {
   color: var(--accent-light);
 }
 
-/* --- Scroll Reveal Animation --- */
-.reveal {
+/* --- Scroll Reveal Animation ---
+   Scoped under .js (set by an inline script in <head>) so that without
+   JavaScript the content stays visible instead of stuck at opacity 0. */
+.js .reveal {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.reveal.visible {
+.js .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
