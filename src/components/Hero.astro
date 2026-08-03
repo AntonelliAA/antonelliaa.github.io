@@ -49,6 +49,10 @@ const t = useTranslations(lang);
   .hero__inner {
     position: relative;
     z-index: 1;
+    /* .hero is a flex container, so this would otherwise shrink to fit its
+       content and the auto margins would centre it, leaving the hero text
+       misaligned with every other section's container. */
+    width: 100%;
   }
 
   .hero__content {
