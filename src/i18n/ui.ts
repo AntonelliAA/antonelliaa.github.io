@@ -12,6 +12,9 @@ export const ui = {
     // Accessibility
     'a11y.skip': 'Skip to content',
 
+    // Header
+    'header.status': 'Open to work',
+
     // Nav
     'nav.about': 'About',
     'nav.experience': 'Experience',
@@ -26,9 +29,7 @@ export const ui = {
     'hero.description': 'Building native iOS applications with Swift & SwiftUI. 3 live products in production (App Store + Google Play), hackathon podium, and 2+ years across mobile and fullstack development.',
     'hero.cta.projects': 'View Projects',
     'hero.cta.cv': 'Download CV',
-    'hero.badge.status': 'Open to Work',
-    'hero.badge.location': 'Porto Alegre, Brazil',
-    'hero.badge.level': 'Junior / Mid-Level',
+    'hero.location': 'Porto Alegre, Brazil',
 
     // About
     'about.label': 'About Me',
@@ -139,6 +140,9 @@ export const ui = {
     // Accessibility
     'a11y.skip': 'Pular para o conteúdo',
 
+    // Header
+    'header.status': 'Aberto a propostas',
+
     // Nav
     'nav.about': 'Sobre',
     'nav.experience': 'Experiência',
@@ -153,9 +157,7 @@ export const ui = {
     'hero.description': 'Construindo aplicações iOS nativas com Swift & SwiftUI. 3 produtos em produção (App Store + Google Play), pódio em hackathon, e 2+ anos de experiência em desenvolvimento mobile e fullstack.',
     'hero.cta.projects': 'Ver Projetos',
     'hero.cta.cv': 'Download CV',
-    'hero.badge.status': 'Aberto a Propostas',
-    'hero.badge.location': 'Porto Alegre, Brasil',
-    'hero.badge.level': 'Júnior / Pleno',
+    'hero.location': 'Porto Alegre, Brasil',
 
     // About
     'about.label': 'Sobre Mim',

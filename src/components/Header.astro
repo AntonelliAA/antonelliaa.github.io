@@ -27,6 +27,11 @@ const navItems = [
       <span class="header__logo-text">AA</span>
     </a>
 
+    <p class="header__status">
+      <span class="header__status-dot" aria-hidden="true"></span>
+      {t('header.status')}
+    </p>
+
     <nav class="header__nav" id="nav">
       <ul class="header__nav-list">
         {navItems.map((item) => (
@@ -78,10 +83,33 @@ const navItems = [
   .header__logo-text {
     font-size: 1.25rem;
     font-weight: 800;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+  }
+
+  .header__status {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-right: auto;
+    margin-left: 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+
+  .header__status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+  }
+
+  @media (max-width: 900px) {
+    .header__status {
+      display: none;
+    }
   }
 
   .header__nav-list {
@@ -105,7 +133,7 @@ const navItems = [
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--gradient);
+    background: var(--accent);
     transition: width var(--transition-base);
   }
 
