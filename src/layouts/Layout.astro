@@ -95,13 +95,8 @@ const {
         }, { passive: true });
       }
 
-      // Run on initial load and on view transitions
       initReveal();
       initBackToTop();
-      document.addEventListener('astro:page-load', () => {
-        initReveal();
-        initBackToTop();
-      });
     </script>
   </body>
 </html>
