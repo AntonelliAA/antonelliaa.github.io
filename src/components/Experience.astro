@@ -11,7 +11,6 @@ const t = useTranslations(lang);
 
 const experiences = [
   {
-    icon: '📱',
     role: t('exp.1.role'),
     company: t('exp.1.company'),
     period: t('exp.1.period'),
@@ -19,7 +18,6 @@ const experiences = [
     current: true,
   },
   {
-    icon: '💻',
     role: t('exp.2.role'),
     company: t('exp.2.company'),
     period: t('exp.2.period'),
@@ -27,7 +25,6 @@ const experiences = [
     current: false,
   },
   {
-    icon: '🌐',
     role: t('exp.3.role'),
     company: t('exp.3.company'),
     period: t('exp.3.period'),
@@ -48,9 +45,7 @@ const experiences = [
       {experiences.map((exp, i) => (
         <div class="exp__item reveal" style={`transition-delay: ${i * 100}ms`}>
           <div class="exp__line-container">
-            <div class={`exp__dot ${exp.current ? 'exp__dot--active' : ''}`}>
-              <span>{exp.icon}</span>
-            </div>
+            <div class={`exp__dot ${exp.current ? 'exp__dot--active' : ''}`}></div>
             {i < experiences.length - 1 && <div class="exp__line"></div>}
           </div>
           <div class="exp__content card">
@@ -90,26 +85,23 @@ const experiences = [
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 40px;
+    min-width: 13px;
   }
 
   .exp__dot {
-    width: 40px;
-    height: 40px;
+    width: 13px;
+    height: 13px;
+    margin-top: 0.6rem;
     border-radius: 50%;
-    background: var(--bg-secondary);
-    border: 2px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
+    background: var(--bg-primary);
+    border: 2px solid var(--border-hover);
     flex-shrink: 0;
     z-index: 1;
   }
 
   .exp__dot--active {
+    background: var(--accent);
     border-color: var(--accent);
-    box-shadow: 0 0 12px rgba(247, 44, 37, 0.2);
   }
 
   .exp__line {
@@ -174,16 +166,6 @@ const experiences = [
   }
 
   @media (max-width: 600px) {
-    .exp__line-container {
-      min-width: 32px;
-    }
-
-    .exp__dot {
-      width: 32px;
-      height: 32px;
-      font-size: 0.9rem;
-    }
-
     .exp__item {
       gap: 1rem;
     }
