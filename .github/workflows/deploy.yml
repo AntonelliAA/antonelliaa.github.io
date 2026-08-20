@@ -18,6 +18,8 @@ jobs:
       - uses: withastro/action@v3
         with:
           node-version: 22
+        env:
+          PUBLIC_CLARITY_PROJECT_ID: ${{ secrets.PUBLIC_CLARITY_PROJECT_ID || vars.PUBLIC_CLARITY_PROJECT_ID }}
 
   deploy:
     needs: build

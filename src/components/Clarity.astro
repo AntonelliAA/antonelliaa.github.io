@@ -1,0 +1,13 @@
+---
+// Microsoft Clarity Analytics integration
+---
+
+<script>
+  import Clarity from '@microsoft/clarity';
+
+  const clarityId = import.meta.env.PUBLIC_CLARITY_PROJECT_ID;
+
+  if (clarityId) {
+    Clarity.init(clarityId);
+  }
+</script>
