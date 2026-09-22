@@ -1,0 +1,30 @@
+---
+const { title } = Astro.props.frontmatter;
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={title} />
+    <title>{title}</title>
+    <style>
+      :root { color-scheme: light dark; font-family: system-ui, sans-serif; line-height: 1.65; }
+      body { max-width: 74ch; margin: 0 auto; padding: 1.5rem; }
+      nav { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
+      a { color: #2869c7; }
+      h1 { line-height: 1.2; }
+      h2 { margin-top: 2.5rem; border-top: 1px solid #8888; padding-top: 1.5rem; }
+      h3 { margin-top: 1.75rem; }
+      @media (prefers-color-scheme: dark) { a { color: #88b9ff; } }
+    </style>
+  </head>
+  <body>
+    <nav aria-label="Documentos do Palco">
+      <a href="/palco/privacy/">Privacidade / Privacy</a>
+      <a href="/palco/terms/">Termos / Terms</a>
+      <a href="/palco/support/">Suporte / Support</a>
+    </nav>
+    <main><slot /></main>
+  </body>
+</html>
