@@ -3,26 +3,27 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Clarity from '../components/Clarity.astro';
+import type { ImageMetadata } from 'astro';
 import type { Lang } from '../i18n/ui';
 import { useTranslations } from '../i18n/utils';
 
-interface Props {
-  title?: string;
-  description?: string;
-  lang?: Lang;
-}
-
+interface Props { title?: string; description?: string; lang?: Lang; }
 const {
-  title = 'Anthony Antonelli — iOS Developer & Software Engineer',
-  description = 'Portfolio of Anthony Antonelli Andrade. iOS Developer specializing in Swift & SwiftUI. App Store published developer with experience in fullstack web development.',
+  title = 'Anthony Antonelli — iOS Developer',
+  description = 'Anthony Antonelli designs, builds, and ships iPhone apps. Explore Palco, Freela onTap, Rise of the Lich King, odinPedidos, and Boraa.',
   lang = 'en',
 } = Astro.props;
-
 const t = useTranslations(lang);
-
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL('/og-image.jpg', Astro.site);
-
+const socialFiles = import.meta.glob('../assets/portfolio-visuals/og-*.{png,jpg,jpeg,webp,avif}', { eager: true, import: 'default' }) as Record<string, ImageMetadata>;
+const socialName = lang === 'pt-br' ? 'og-pt' : 'og-en';
+const socialImage = Object.entries(socialFiles).find(([path]) => path.split('/').pop()?.replace(/\.[^.]+$/, '') === socialName)?.[1];
+const ogImage = socialImage ? new URL(socialImage.src, Astro.site) : undefined;
+const alternates = [
+  { hreflang: 'en', href: new URL('/', Astro.site) },
+  { hreflang: 'pt-BR', href: new URL('/pt-br/', Astro.site) },
+  { hreflang: 'x-default', href: new URL('/', Astro.site) },
+];
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
@@ -30,32 +31,13 @@ const personSchema = {
   url: Astro.site?.href,
   jobTitle: 'iOS Developer',
   email: 'antonellia.dev@gmail.com',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Porto Alegre',
-    addressRegion: 'RS',
-    addressCountry: 'BR',
-  },
-  alumniOf: {
-    '@type': 'CollegeOrUniversity',
-    name: 'Pontifícia Universidade Católica do Rio Grande do Sul (PUCRS)',
-  },
+  address: { '@type': 'PostalAddress', addressLocality: 'Porto Alegre', addressRegion: 'RS', addressCountry: 'BR' },
+  affiliation: { '@type': 'CollegeOrUniversity', name: 'Pontifícia Universidade Católica do Rio Grande do Sul (PUCRS)' },
   knowsAbout: ['Swift', 'SwiftUI', 'UIKit', 'iOS Development', 'React Native', 'TypeScript', 'Node.js'],
   knowsLanguage: ['pt-BR', 'en'],
-  sameAs: [
-    'https://github.com/AntonelliAA',
-    'https://linkedin.com/in/anthony-antonelli-andrade',
-  ],
+  sameAs: ['https://github.com/AntonelliAA', 'https://linkedin.com/in/anthony-antonelli-andrade'],
 };
-
-// hreflang pairs — both locales are single pages, so these are static.
-const alternates = [
-  { hreflang: 'en', href: new URL('/', Astro.site) },
-  { hreflang: 'pt-BR', href: new URL('/pt-br/', Astro.site) },
-  { hreflang: 'x-default', href: new URL('/', Astro.site) },
-];
 ---
-
 <!doctype html>
 <html lang={lang === 'pt-br' ? 'pt-BR' : 'en'}>
   <head>
@@ -63,132 +45,31 @@ const alternates = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="author" content="Anthony Antonelli Andrade" />
-
     <link rel="canonical" href={canonical} />
-    {alternates.map((alt) => (
-      <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
-    ))}
-
-    <!-- Open Graph -->
+    {alternates.map((alt) => <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />)}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={lang === 'pt-br' ? 'pt_BR' : 'en_US'} />
     <meta property="og:locale:alternate" content={lang === 'pt-br' ? 'en_US' : 'pt_BR'} />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Anthony Antonelli — iOS Developer & Software Engineer" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    {socialImage && <meta property="og:image:width" content={socialImage.width} />}
+    {socialImage && <meta property="og:image:height" content={socialImage.height} />}
+    {socialImage && <meta property="og:image:alt" content={lang === 'pt-br' ? 'Portfólio de Anthony Antonelli' : 'Anthony Antonelli portfolio'} />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
-
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
-
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)} is:inline />
-
-    <!-- Runs before first paint. Gates the scroll-reveal CSS (without JS the
-         content renders as-is) and restores a saved theme so the page never
-         flashes the wrong palette. No saved choice means the CSS media query
-         decides, which is why nothing is written here by default. -->
-    <script is:inline>
-      document.documentElement.classList.add('js');
-      try {
-        const saved = localStorage.getItem('theme');
-        if (saved === 'light' || saved === 'dark') {
-          document.documentElement.setAttribute('data-theme', saved);
-        }
-      } catch {}
-    </script>
     <Clarity />
   </head>
   <body>
-    <a href="#main" class="skip-link">{t('a11y.skip')}</a>
+    <a class="skip-link" href="#main">{t('a11y.skip')}</a>
     <Header lang={lang} />
-    <main id="main">
-      <slot />
-    </main>
+    <main id="main"><slot /></main>
     <Footer lang={lang} />
-
-    <!-- Back to Top -->
-    <a href="#hero" class="back-to-top" id="backToTop" aria-label="Back to top">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="18 15 12 9 6 15"/>
-      </svg>
-    </a>
-
-    <!-- Scroll Reveal + Back to Top -->
-    <script>
-      function initReveal() {
-        const elements = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
-        );
-        elements.forEach((el) => observer.observe(el));
-      }
-
-      function initBackToTop() {
-        const btn = document.getElementById('backToTop');
-        if (!btn) return;
-
-        window.addEventListener('scroll', () => {
-          if (window.scrollY > 600) {
-            btn.classList.add('visible');
-          } else {
-            btn.classList.remove('visible');
-          }
-        }, { passive: true });
-      }
-
-      initReveal();
-      initBackToTop();
-    </script>
   </body>
 </html>
-
-<style is:global>
-  .back-to-top {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-secondary);
-    opacity: 0;
-    transform: translateY(10px);
-    pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.2s ease, color 0.2s ease;
-    z-index: 50;
-  }
-
-  .back-to-top.visible {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-
-  .back-to-top:hover {
-    border-color: var(--accent-light);
-    color: var(--accent-light);
-  }
-</style>

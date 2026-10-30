@@ -1,137 +1,36 @@
 ---
 import type { Lang } from '../i18n/ui';
 import { useTranslations } from '../i18n/utils';
+import ProjectVisual from './ProjectVisual.astro';
 
-interface Props {
-  lang: Lang;
-}
-
+interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
 
 <section class="hero" id="hero">
-  <div class="hero__inner container">
-    <div class="hero__content">
-      <p class="hero__greeting">{t('hero.greeting')}</p>
-      <h1 class="hero__name">{t('hero.name')}</h1>
-      <p class="hero__title">{t('hero.title')}</p>
-      <p class="hero__location">{t('hero.location')}</p>
-      <p class="hero__description">{t('hero.description')}</p>
-
-      <div class="hero__ctas">
-        <a href="#projects" class="btn btn-primary">{t('hero.cta.projects')} ↓</a>
-        <a href="/resume/cv.pdf" download="Anthony_Antonelli_CV.pdf" class="btn btn-secondary">
-          {t('hero.cta.cv')}
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <polyline points="7 10 12 15 17 10"/>
-            <line x1="12" y1="15" x2="12" y2="3"/>
-          </svg>
-        </a>
+  <div class="container hero__intro">
+    <p class="hero__eyebrow">{lang === 'pt-br' ? 'DESENVOLVEDOR iOS · PORTO ALEGRE' : 'iOS DEVELOPER · PORTO ALEGRE'}</p>
+    <h1>Anthony<br />Antonelli<span aria-hidden="true">.</span></h1>
+    <div class="hero__summary">
+      <p class="hero__role">{t('hero.title')}</p>
+      <div class="hero__summary-right">
+        <p>{t('hero.description')}</p>
+        <a class="text-link text-link--light" href="#projects">{t('hero.cta.projects')} <span aria-hidden="true">↗</span></a>
       </div>
     </div>
-
-    <div class="hero__grid-bg" aria-hidden="true"></div>
+  </div>
+  <div class="hero__product">
+    <div class="hero__product-inner container">
+      <div class="hero__product-word" aria-hidden="true">Palco</div>
+      <div class="hero__phones">
+        <ProjectVisual lang={lang} slot="palco-gravacao" project="Palco" scene={lang === 'pt-br' ? 'Gravação' : 'Recording'} shape="portrait" className="hero__phone hero__phone--back" priority />
+        <ProjectVisual lang={lang} slot="palco-analise" project="Palco" scene={lang === 'pt-br' ? 'Análise da fala' : 'Speech analysis'} shape="portrait" className="hero__phone hero__phone--front" priority />
+      </div>
+      <div class="hero__product-caption">
+        <span>01 / PALCO</span>
+        <span>{lang === 'pt-br' ? 'App independente na App Store' : 'Independent app on the App Store'}</span>
+      </div>
+    </div>
   </div>
 </section>
-
-<style>
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    position: relative;
-    padding-top: 5rem;
-    overflow: hidden;
-  }
-
-  .hero__inner {
-    position: relative;
-    z-index: 1;
-    /* .hero is a flex container, so this would otherwise shrink to fit its
-       content and the auto margins would centre it, leaving the hero text
-       misaligned with every other section's container. */
-    width: 100%;
-  }
-
-  .hero__content {
-    max-width: 680px;
-    position: relative;
-    z-index: 2;
-  }
-
-  .hero__greeting {
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-    margin-bottom: 0.5rem;
-  }
-
-  .hero__name {
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 0.75rem;
-    color: var(--accent);
-  }
-
-  .hero__title {
-    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 0.5rem;
-  }
-
-  .hero__location {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    margin-bottom: 1.5rem;
-  }
-
-  .hero__description {
-    font-size: 1rem;
-    color: var(--text-secondary);
-    line-height: 1.7;
-    max-width: 560px;
-    margin-bottom: 2.5rem;
-  }
-
-  .hero__ctas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  /* Subtle grid background */
-  .hero__grid-bg {
-    position: absolute;
-    top: 0;
-    right: -10%;
-    width: 600px;
-    height: 600px;
-    background-image:
-      linear-gradient(rgba(var(--accent-rgb), 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(var(--accent-rgb), 0.05) 1px, transparent 1px);
-    background-size: 40px 40px;
-    border-radius: 50%;
-    filter: blur(1px);
-    opacity: 0.6;
-    mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, black 20%, transparent 70%);
-    -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, black 20%, transparent 70%);
-    pointer-events: none;
-  }
-
-  @media (max-width: 768px) {
-    .hero {
-      padding-top: 6rem;
-      min-height: auto;
-      padding-bottom: 4rem;
-    }
-
-    .hero__grid-bg {
-      display: none;
-    }
-  }
-</style>

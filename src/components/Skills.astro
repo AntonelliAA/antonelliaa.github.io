@@ -1,119 +1,45 @@
 ---
 import type { Lang } from '../i18n/ui';
 import { useTranslations } from '../i18n/utils';
-
-interface Props {
-  lang: Lang;
-}
-
+interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-
-// Each entry pairs a technology with where it was actually used. A bare tag
-// cloud says nothing a recruiter can verify; the context is the evidence.
 const groups = [
-  {
-    name: t('skills.group.apple'),
-    items: [
-      { tech: 'Swift', ctx: t('skills.ctx.swift') },
-      { tech: 'SwiftUI', ctx: t('skills.ctx.swiftui') },
-      { tech: 'UIKit', ctx: t('skills.ctx.uikit') },
-      { tech: 'StoreKit 2', ctx: t('skills.ctx.storekit') },
-      { tech: 'Core Data / SwiftData', ctx: t('skills.ctx.persistence') },
-      { tech: 'MapKit', ctx: t('skills.ctx.mapkit') },
-    ],
-  },
-  {
-    name: t('skills.group.cross'),
-    items: [
-      { tech: 'React Native / Expo', ctx: t('skills.ctx.reactnative') },
-      { tech: 'TypeScript', ctx: t('skills.ctx.typescript') },
-      { tech: 'Node.js', ctx: t('skills.ctx.node') },
-      { tech: 'React', ctx: t('skills.ctx.react') },
-      { tech: 'PostgreSQL / MySQL', ctx: t('skills.ctx.sql') },
-      { tech: 'AWS', ctx: t('skills.ctx.aws') },
-    ],
-  },
+  { name: t('skills.group.apple'), items: [
+    ['Swift', t('skills.ctx.swift')],
+    ['SwiftUI', t('skills.ctx.swiftui')],
+    ['UIKit', t('skills.ctx.uikit')],
+    ['StoreKit 2', t('skills.ctx.storekit')],
+    ['Core Data / SwiftData', t('skills.ctx.persistence')],
+    ['MapKit', t('skills.ctx.mapkit')],
+  ] },
+  { name: t('skills.group.cross'), items: [
+    ['React Native / Expo', t('skills.ctx.reactnative')],
+    ['TypeScript', t('skills.ctx.typescript')],
+    ['Node.js', t('skills.ctx.node')],
+    ['React', t('skills.ctx.react')],
+    ['PostgreSQL / MySQL', t('skills.ctx.sql')],
+    ['AWS', t('skills.ctx.aws')],
+  ] },
 ];
 ---
 
-<section class="section skills" id="skills">
+<section class="skills section" id="skills">
   <div class="container">
-    <div class="reveal">
-      <span class="section-label">{t('skills.label')}</span>
-      <h2 class="section-title">{t('skills.title')}</h2>
-      <p class="section-subtitle">{t('skills.subtitle')}</p>
+    <div class="section-heading">
+      <p class="kicker">{t('skills.label')}</p>
+      <h2>{t('skills.title')}</h2>
+      <p>{t('skills.subtitle')}</p>
     </div>
-
-    <div class="skills__grid">
-      {groups.map((group, i) => (
-        <div class="skills__group reveal" style={`transition-delay: ${i * 80}ms`}>
-          <h3 class="skills__group-name">{group.name}</h3>
-          <dl class="skills__list">
-            {group.items.map((item) => (
-              <div class="skills__row">
-                <dt class="skills__tech">{item.tech}</dt>
-                <dd class="skills__ctx">{item.ctx}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      ))}
+    <div class="skills__columns">
+      {groups.map((group) => <div class="skills__column">
+        <h3>{group.name}</h3>
+        <dl>{group.items.map((item) => <div class="skills__row"><dt>{item[0]}</dt><dd>{item[1]}</dd></div>)}</dl>
+      </div>)}
+    </div>
+    <div class="skills__workflow">
+      <h3>{t('skills.ai.label')}</h3>
+      <p>{t('skills.ai.desc')}</p>
     </div>
   </div>
 </section>
-
-<style>
-  .skills__grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem 3.5rem;
-    margin-top: 2rem;
-  }
-
-  .skills__group-name {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--border-hover);
-  }
-
-  .skills__row {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1.5rem;
-    padding: 0.7rem 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .skills__tech {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--text-primary);
-    white-space: nowrap;
-  }
-
-  .skills__ctx {
-    font-size: 0.78rem;
-    line-height: 1.5;
-    color: var(--text-secondary);
-    text-align: right;
-  }
-
-  @media (max-width: 768px) {
-    .skills__grid {
-      grid-template-columns: 1fr;
-    }
-
-    .skills__row {
-      flex-direction: column;
-      gap: 0.2rem;
-    }
-
-    .skills__ctx {
-      text-align: left;
-    }
-  }
-</style>

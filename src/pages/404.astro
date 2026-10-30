@@ -1,65 +1,28 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-// GitHub Pages serves a single 404.html for every locale, so this page says it
-// in both rather than guessing.
 ---
 
-<Layout
-  lang="en"
-  title="Page not found — Anthony Antonelli"
-  description="That page does not exist."
->
-  <section class="section notfound">
+<Layout lang="en" title="Page not found — Anthony Antonelli" description="That page does not exist.">
+  <section class="notfound">
     <div class="container">
-      <p class="section-label">404</p>
-      <h1 class="notfound__title">This page doesn't exist</h1>
-      <p class="notfound__text">
-        The link may be out of date, or the address mistyped.
-      </p>
-      <p class="notfound__text notfound__text--alt" lang="pt-BR">
-        Essa página não existe. O link pode estar desatualizado, ou o endereço
-        foi digitado errado.
-      </p>
-
-      <div class="notfound__ctas">
-        <a href="/" class="btn btn-primary">Back to the portfolio</a>
-        <a href="/pt-br/" class="btn btn-secondary" lang="pt-BR">Ver em português</a>
+      <p class="notfound__code">404<span>.</span></p>
+      <h1>This page doesn't exist.</h1>
+      <p>The link may be out of date, or the address mistyped.</p>
+      <p lang="pt-BR">Essa página não existe. O link pode estar desatualizado ou o endereço foi digitado errado.</p>
+      <div class="notfound__links">
+        <a href="/">Back to the portfolio ↗</a>
+        <a href="/pt-br/" lang="pt-BR">Ver em português ↗</a>
       </div>
     </div>
   </section>
 </Layout>
 
 <style>
-  .notfound {
-    min-height: 70vh;
-    display: flex;
-    align-items: center;
-    padding-top: 6rem;
-  }
-
-  .notfound__title {
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    color: var(--text-primary);
-    margin-bottom: 1rem;
-  }
-
-  .notfound__text {
-    font-size: 1rem;
-    color: var(--text-secondary);
-    max-width: 46ch;
-    margin-bottom: 0.5rem;
-  }
-
-  .notfound__text--alt {
-    margin-bottom: 2rem;
-  }
-
-  .notfound__ctas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
+  .notfound { display: flex; align-items: center; min-height: 78vh; padding: 95px 0; background: #f4f5f4; }
+  .notfound__code { font-size: clamp(7rem, 23vw, 19rem); line-height: .75; font-weight: 750; letter-spacing: -.1em; }
+  .notfound__code span { color: #ef6b30; }
+  h1 { max-width: 20ch; margin-top: 40px; font-size: clamp(2.2rem, 5vw, 5rem); line-height: 1.05; letter-spacing: -.06em; }
+  .notfound p:not(.notfound__code) { max-width: 55ch; margin-top: 15px; color: #565c60; }
+  .notfound__links { display: flex; flex-wrap: wrap; gap: 15px 35px; margin-top: 32px; }
+  .notfound__links a { display: inline-flex; align-items: center; min-height: 44px; color: #a74420; font-weight: 650; text-decoration: underline; text-underline-offset: 4px; }
 </style>

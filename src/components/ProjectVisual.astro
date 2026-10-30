@@ -1,0 +1,39 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  slot: string;
+  project: string;
+  scene: string;
+  shape: 'portrait' | 'landscape' | 'square';
+  className?: string;
+  priority?: boolean;
+}
+
+const { lang, slot, project, scene, shape, className, priority = false } = Astro.props;
+const files = import.meta.glob('../assets/portfolio-visuals/*.{png,jpg,jpeg,webp,avif}', { eager: true, import: 'default' }) as Record<string, ImageMetadata>;
+const image = Object.entries(files).find(([path]) => path.split('/').pop()?.replace(/\.[^.]+$/, '') === slot)?.[1];
+const alt = `${project}: ${scene}`;
+---
+
+<div
+  class:list={['project-visual', `project-visual--${shape}`, { 'project-visual--filled': !!image }, className]}
+  data-asset-slot={slot}
+  role={image ? undefined : 'img'}
+  aria-label={image ? undefined : (lang === 'pt-br' ? `Espaço reservado para ${alt}` : `Placeholder for ${alt}`)}
+>
+  {image ? (
+    <Image class="project-visual__image" src={image} alt={alt} loading={priority ? 'eager' : 'lazy'} />
+  ) : shape === 'square' ? (
+    <span class="project-visual__square-mark" aria-hidden="true">+</span>
+  ) : (
+    <>
+      <span class="project-visual__top" aria-hidden="true">{project}</span>
+      <strong class="project-visual__scene" aria-hidden="true">{scene}</strong>
+      <span class="project-visual__bottom" aria-hidden="true">{lang === 'pt-br' ? 'Imagem a inserir' : 'Image to add'}</span>
+    </>
+  )}
+</div>
