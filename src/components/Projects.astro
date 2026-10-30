@@ -6,11 +6,10 @@ import ProjectVisual from './ProjectVisual.astro';
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-const store = lang === 'pt-br' ? 'Ver na App Store' : 'View on the App Store';
 const other = [
   { name: t('proj.8.name'), description: t('proj.8.desc'), link: 'https://apps.apple.com/br/app/boraa/id6752790553', linkLabel: t('proj.8.link.label'), icon: true },
-  { name: t('proj.4.name'), description: t('proj.4.desc'), link: 'https://tools.ages.pucrs.br/bah-plataforma-de-inova-o-de-caxias-do-sul/bah-wiki/-/wikis/home', linkLabel: lang === 'pt-br' ? 'Ver projeto' : 'View project', icon: null },
-  { name: t('proj.5.name'), description: t('proj.5.desc'), link: 'https://tools.ages.pucrs.br/ludo-pets/wiki/-/wikis/home', linkLabel: lang === 'pt-br' ? 'Ver projeto' : 'View project', icon: null },
+  { name: t('proj.4.name'), description: t('proj.4.desc'), link: 'https://tools.ages.pucrs.br/bah-plataforma-de-inova-o-de-caxias-do-sul/bah-wiki/-/wikis/home', linkLabel: t('proj.view'), icon: false },
+  { name: t('proj.5.name'), description: t('proj.5.desc'), link: 'https://tools.ages.pucrs.br/ludo-pets/wiki/-/wikis/home', linkLabel: t('proj.view'), icon: false },
 ];
 ---
 
@@ -24,9 +23,9 @@ const other = [
   <article class="feature feature--palco" aria-labelledby="palco-title">
     <div class="container feature__grid">
       <div class="feature__copy">
-        <p class="feature__number">01 / {lang === 'pt-br' ? 'PROJETO INDEPENDENTE' : 'INDEPENDENT PROJECT'}</p>
-        <h3 id="palco-title">Palco<span class="feature__period">.</span></h3>
-        <p class="feature__lead">{lang === 'pt-br' ? 'Treine uma apresentação e veja onde melhorar.' : 'Practice a talk and see what to improve.'}</p>
+        <p class="feature__number">{t('proj.3.kind')}</p>
+        <h3 id="palco-title">Palco</h3>
+        <p class="feature__lead">{t('proj.3.lead')}</p>
         <p class="feature__description">{t('proj.3.desc')}</p>
         <div class="feature__process">
           <p>{t('proj.3.ai.label')}</p>
@@ -34,12 +33,12 @@ const other = [
         </div>
         <div class="feature__foot">
           <span>{t('proj.3.stack')}</span>
-          <a class="text-link" href="https://apps.apple.com/br/app/palco-orat%C3%B3ria-e-apresenta%C3%A7%C3%A3o/id6796434989" target="_blank" rel="noopener noreferrer">{store} <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="https://apps.apple.com/br/app/palco-orat%C3%B3ria-e-apresenta%C3%A7%C3%A3o/id6796434989" target="_blank" rel="noopener noreferrer">{t('proj.store')} <span aria-hidden="true">↗</span></a>
         </div>
       </div>
       <div class="feature__media feature__media--palco">
-        <ProjectVisual lang={lang} slot="palco-gravacao" project="Palco" scene={lang === 'pt-br' ? 'Gravação' : 'Recording'} shape="portrait" className="feature__phone feature__phone--palco-left" />
-        <ProjectVisual lang={lang} slot="palco-analise" project="Palco" scene={lang === 'pt-br' ? 'Análise da fala' : 'Speech analysis'} shape="portrait" className="feature__phone feature__phone--palco-right" />
+        <ProjectVisual lang={lang} slot="palco-transcricao" project="Palco" scene={t('proj.3.scene.transcript')} shape="portrait" className="feature__phone feature__phone--palco-left" />
+        <ProjectVisual lang={lang} slot="palco-gravacao" project="Palco" scene={t('proj.3.scene.recording')} shape="portrait" className="feature__phone feature__phone--palco-right" />
       </div>
     </div>
   </article>
@@ -47,16 +46,14 @@ const other = [
   <article class="feature feature--freela" aria-labelledby="freela-title">
     <div class="container">
       <div class="feature__freela-head">
-        <p class="feature__number">02 / {lang === 'pt-br' ? 'DOIS APPS, UM SERVIÇO' : 'TWO APPS, ONE SERVICE'}</p>
-        <h3 id="freela-title">Freela<br />onTap<span class="feature__period">.</span></h3>
-        <p class="feature__lead">{lang === 'pt-br' ? 'Dois apps para um mesmo turno.' : 'Two apps for the same shift.'}</p>
-        <p class="feature__freela-detail">{lang === 'pt-br'
-          ? 'Desenvolvi os dois apps nativos em uma base SwiftUI compartilhada. Entre as entregas estão mapa com busca por distância, onboarding e notificações.'
-          : 'I developed both native apps on a shared SwiftUI foundation. My work included maps with distance search, onboarding, and notifications.'}</p>
+        <p class="feature__number">{t('proj.freela.kind')}</p>
+        <h3 id="freela-title">Freela<br />onTap</h3>
+        <p class="feature__lead">{t('proj.freela.lead')}</p>
+        <p class="feature__freela-detail">{t('proj.freela.desc')}</p>
       </div>
       <div class="freela__pair">
         <div class="freela__item">
-          <div class="freela__image"><ProjectVisual lang={lang} slot="freela-empresas" project="Freela onTap" scene={lang === 'pt-br' ? 'Empresas' : 'Business'} shape="landscape" /></div>
+          <div class="freela__image freela__image--business"><ProjectVisual lang={lang} slot="freela-empresas" project={t('proj.6.name')} scene={t('proj.6.scene')} shape="portrait" /></div>
           <div class="freela__copy">
             <p class="freela__status">{t('proj.6.status')}</p>
             <h4>{t('proj.6.name')}</h4>
@@ -65,7 +62,7 @@ const other = [
           </div>
         </div>
         <div class="freela__item">
-          <div class="freela__image"><ProjectVisual lang={lang} slot="freela-vagas" project="Freela onTap" scene={lang === 'pt-br' ? 'Vagas e turnos' : 'Shifts'} shape="landscape" /></div>
+          <div class="freela__image freela__image--worker"><ProjectVisual lang={lang} slot="freela-vagas" project={t('proj.7.name')} scene={t('proj.7.scene')} shape="portrait" /></div>
           <div class="freela__copy">
             <p class="freela__status">{t('proj.7.status')}</p>
             <h4>{t('proj.7.name')}</h4>
@@ -79,16 +76,16 @@ const other = [
 
   <article class="feature feature--rise" aria-labelledby="rise-title">
     <div class="container feature__rise-inner">
-      <p class="feature__number">03 / {lang === 'pt-br' ? 'JOGO PARA iOS' : 'iOS GAME'}</p>
-      <h3 id="rise-title">Rise of the<br />Lich King<span class="feature__period">.</span></h3>
-      <p class="feature__lead">{lang === 'pt-br' ? 'Jogo iOS da primeira tela à App Store.' : 'An iOS game built through its App Store release.'}</p>
+      <p class="feature__number">{t('proj.1.kind')}</p>
+      <h3 id="rise-title">Rise of the<br />Lich King</h3>
+      <p class="feature__lead">{t('proj.1.lead')}</p>
       <div class="feature__rise-media">
-        <ProjectVisual lang={lang} slot="rise-abertura" project="Rise of the Lich King" scene={lang === 'pt-br' ? 'Tela inicial' : 'Title screen'} shape="landscape" />
-        <ProjectVisual lang={lang} slot="rise-jogo" project="Rise of the Lich King" scene={lang === 'pt-br' ? 'Cena do jogo' : 'Gameplay'} shape="landscape" />
+        <ProjectVisual lang={lang} slot="rise-abertura" project="Rise of the Lich King" scene={t('proj.1.scene.a')} shape="landscape" />
+        <ProjectVisual lang={lang} slot="rise-jogo" project="Rise of the Lich King" scene={t('proj.1.scene.b')} shape="landscape" />
       </div>
       <div class="feature__rise-bottom">
         <p>{t('proj.1.desc')}</p>
-        <a class="text-link text-link--light" href="https://apps.apple.com/br/app/rise-of-the-lich-king/id6760662821" target="_blank" rel="noopener noreferrer">{store} <span aria-hidden="true">↗</span></a>
+        <a class="text-link text-link--light" href="https://apps.apple.com/br/app/rise-of-the-lich-king/id6760662821" target="_blank" rel="noopener noreferrer">{t('proj.store')} <span aria-hidden="true">↗</span></a>
       </div>
     </div>
   </article>
@@ -96,17 +93,17 @@ const other = [
   <article class="feature feature--odin" aria-labelledby="odin-title">
     <div class="container feature__grid feature__grid--reverse">
       <div class="feature__media feature__media--odin">
-        <ProjectVisual lang={lang} slot="odin-lista" project="odinPedidos" scene={lang === 'pt-br' ? 'Lista de pedidos' : 'Orders'} shape="portrait" className="feature__phone feature__phone--odin-left" />
-        <ProjectVisual lang={lang} slot="odin-detalhes" project="odinPedidos" scene={lang === 'pt-br' ? 'Detalhes' : 'Details'} shape="portrait" className="feature__phone feature__phone--odin-right" />
+        <ProjectVisual lang={lang} slot="odin-lista" project="odinPedidos" scene={t('proj.2.scene.a')} shape="portrait" className="feature__phone feature__phone--odin-left" />
+        <ProjectVisual lang={lang} slot="odin-detalhes" project="odinPedidos" scene={t('proj.2.scene.b')} shape="portrait" className="feature__phone feature__phone--odin-right" />
       </div>
       <div class="feature__copy">
-        <p class="feature__number">04 / {lang === 'pt-br' ? 'PRODUTO PARA NEGÓCIOS' : 'BUSINESS PRODUCT'}</p>
-        <h3 id="odin-title">odinPedidos<span class="feature__period">.</span></h3>
-        <p class="feature__lead">{lang === 'pt-br' ? 'Pedidos para representantes em campo.' : 'Order management for sales reps in the field.'}</p>
+        <p class="feature__number">{t('proj.2.kind')}</p>
+        <h3 id="odin-title">{t('proj.2.name')}</h3>
+        <p class="feature__lead">{t('proj.2.lead')}</p>
         <p class="feature__description">{t('proj.2.desc')}</p>
         <div class="feature__foot">
           <span>{t('proj.2.stack')}</span>
-          <a class="text-link" href="https://apps.apple.com/br/app/odin-pedidos/id6755982771" target="_blank" rel="noopener noreferrer">{store} <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="https://apps.apple.com/br/app/odin-pedidos/id6755982771" target="_blank" rel="noopener noreferrer">{t('proj.store')} <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </div>
@@ -117,7 +114,7 @@ const other = [
     <div class="work__other-list">
       {other.map((item) => <article>
         <div class="work__other-main">
-          {item.icon && <ProjectVisual lang={lang} slot="boraa-icone" project="Boraa" scene={lang === 'pt-br' ? 'Ícone' : 'Icon'} shape="square" className="work__other-icon" />}
+          {item.icon && <ProjectVisual lang={lang} slot="boraa-icone" project="Boraa" scene={t('proj.8.scene')} shape="square" className="work__other-icon" />}
           <div><h4>{item.name}</h4><p>{item.description}</p></div>
         </div>
         <a class="text-link" href={item.link} target="_blank" rel="noopener noreferrer">{item.linkLabel} <span aria-hidden="true">↗</span></a>

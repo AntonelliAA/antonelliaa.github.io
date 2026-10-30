@@ -5,7 +5,7 @@ import { useTranslations, getLocalizedPath } from '../i18n/utils';
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-const other = lang === 'en' ? 'pt-br' : 'en';
+const other: Lang = lang === 'en' ? 'pt-br' : 'en';
 const nav = [
   { key: 'nav.projects' as const, href: '#projects' },
   { key: 'nav.about' as const, href: '#about' },
@@ -16,12 +16,12 @@ const nav = [
 
 <header class="site-header">
   <div class="container site-header__inner">
-    <a class="site-header__name" href={getLocalizedPath(lang)} aria-label={lang === 'pt-br' ? 'Anthony Antonelli, início' : 'Anthony Antonelli, home'}>Anthony Antonelli</a>
-    <nav class="site-nav" id="site-nav" aria-label={lang === 'pt-br' ? 'Navegação principal' : 'Main navigation'}>
+    <a class="site-header__name" href={getLocalizedPath(lang)} aria-label={t('a11y.home')}>Anthony Antonelli</a>
+    <nav class="site-nav" id="site-nav" aria-label={t('a11y.nav')}>
       {nav.map((item) => <a href={item.href}>{t(item.key)}</a>)}
-      <a class="site-nav__language" href={getLocalizedPath(other as Lang)} lang={other === 'pt-br' ? 'pt-BR' : 'en'}>{other === 'pt-br' ? 'PT' : 'EN'}</a>
+      <a class="site-nav__language" href={getLocalizedPath(other)} hreflang={other === 'pt-br' ? 'pt-BR' : 'en'} lang={other === 'pt-br' ? 'pt-BR' : 'en'} aria-label={t('a11y.language')}>{t('nav.language')}</a>
     </nav>
-    <button class="menu-toggle" type="button" aria-label={lang === 'pt-br' ? 'Abrir menu' : 'Open menu'} data-open-label={lang === 'pt-br' ? 'Abrir menu' : 'Open menu'} data-close-label={lang === 'pt-br' ? 'Fechar menu' : 'Close menu'} aria-controls="site-nav" aria-expanded="false">
+    <button class="menu-toggle" type="button" aria-label={t('a11y.menu.open')} data-open-label={t('a11y.menu.open')} data-close-label={t('a11y.menu.close')} aria-controls="site-nav" aria-expanded="false">
       <span></span><span></span>
     </button>
   </div>
@@ -31,16 +31,18 @@ const nav = [
   const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
   const nav = document.getElementById('site-nav');
   if (toggle && nav) {
-    toggle.addEventListener('click', () => {
-      const open = toggle.getAttribute('aria-expanded') !== 'true';
+    const setOpen = (open: boolean) => {
       toggle.setAttribute('aria-expanded', String(open));
-      toggle.setAttribute('aria-label', open ? toggle.dataset.closeLabel || 'Close menu' : toggle.dataset.openLabel || 'Open menu');
+      toggle.setAttribute('aria-label', (open ? toggle.dataset.closeLabel : toggle.dataset.openLabel) ?? '');
       nav.classList.toggle('site-nav--open', open);
+    };
+    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+    nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
     });
-    nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
-      toggle.setAttribute('aria-expanded', 'false');
-      toggle.setAttribute('aria-label', toggle.dataset.openLabel || 'Open menu');
-      nav.classList.remove('site-nav--open');
-    }));
   }
 </script>

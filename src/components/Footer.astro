@@ -1,12 +1,14 @@
 ---
 import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
+const t = useTranslations(lang);
 const year = new Date().getFullYear();
 ---
 <footer class="footer">
   <div class="container footer__inner">
     <span>© {year} Anthony Antonelli Andrade</span>
-    <span>{lang === 'pt-br' ? 'Feito em Porto Alegre, Brasil' : 'Made in Porto Alegre, Brazil'}</span>
+    <span>{t('footer.made')}</span>
   </div>
 </footer>

@@ -5,9 +5,9 @@ interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const facts = [
-  { number: '04', title: t('about.highlight.appstore'), detail: t('about.highlight.appstore.desc') },
-  { number: '02', title: lang === 'pt-br' ? 'Apps em pré-venda' : 'Apps available to pre-order', detail: lang === 'pt-br' ? 'Freela onTap para empresas e profissionais.' : 'Freela onTap for businesses and workers.' },
-  { number: '50+', title: lang === 'pt-br' ? 'Clientes pagantes' : 'Paying clients', detail: lang === 'pt-br' ? 'No produto odinPedidos.' : 'Using odinPedidos.' },
+  { number: '4', title: t('about.highlight.appstore'), detail: t('about.highlight.appstore.desc') },
+  { number: '2', title: t('about.highlight.preorder'), detail: t('about.highlight.preorder.desc') },
+  { number: '50+', title: t('about.highlight.clients'), detail: t('about.highlight.clients.desc') },
 ];
 ---
 

@@ -2,6 +2,7 @@
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
 
 interface Props {
   lang: Lang;
@@ -14,8 +15,26 @@ interface Props {
 }
 
 const { lang, slot, project, scene, shape, className, priority = false } = Astro.props;
-const files = import.meta.glob('../assets/portfolio-visuals/*.{png,jpg,jpeg,webp,avif}', { eager: true, import: 'default' }) as Record<string, ImageMetadata>;
-const image = Object.entries(files).find(([path]) => path.split('/').pop()?.replace(/\.[^.]+$/, '') === slot)?.[1];
+const t = useTranslations(lang);
+
+// Final captures in portfolio-visuals/ win; until one arrives, the App Store listing image stands in.
+const storeFallback: Record<string, string> = {
+  'palco-gravacao': 'palco-recording',
+  'palco-analise': 'palco-metrics',
+  'palco-transcricao': 'palco-transcript',
+  'freela-empresas': 'freela-business',
+  'freela-vagas': 'freela-worker',
+  'rise-abertura': 'rise-title',
+  'rise-jogo': 'rise-gameplay',
+  'odin-lista': 'odin-orders',
+  'odin-detalhes': 'odin-detail',
+  'boraa-icone': 'boraa-icon',
+};
+const finals = import.meta.glob('../assets/portfolio-visuals/*.{png,jpg,jpeg,webp,avif}', { eager: true, import: 'default' }) as Record<string, ImageMetadata>;
+const store = import.meta.glob('../assets/projects/*.webp', { eager: true, import: 'default' }) as Record<string, ImageMetadata>;
+const byName = (files: Record<string, ImageMetadata>, name?: string) =>
+  name ? Object.entries(files).find(([path]) => path.split('/').pop()?.replace(/\.[^.]+$/, '') === name)?.[1] : undefined;
+const image = byName(finals, slot) ?? byName(store, storeFallback[slot]);
 const alt = `${project}: ${scene}`;
 ---
 
@@ -23,17 +42,11 @@ const alt = `${project}: ${scene}`;
   class:list={['project-visual', `project-visual--${shape}`, { 'project-visual--filled': !!image }, className]}
   data-asset-slot={slot}
   role={image ? undefined : 'img'}
-  aria-label={image ? undefined : (lang === 'pt-br' ? `Espaço reservado para ${alt}` : `Placeholder for ${alt}`)}
+  aria-label={image ? undefined : `${t('a11y.placeholder')} ${alt}`}
 >
   {image ? (
     <Image class="project-visual__image" src={image} alt={alt} loading={priority ? 'eager' : 'lazy'} />
-  ) : shape === 'square' ? (
-    <span class="project-visual__square-mark" aria-hidden="true">+</span>
   ) : (
-    <>
-      <span class="project-visual__top" aria-hidden="true">{project}</span>
-      <strong class="project-visual__scene" aria-hidden="true">{scene}</strong>
-      <span class="project-visual__bottom" aria-hidden="true">{lang === 'pt-br' ? 'Imagem a inserir' : 'Image to add'}</span>
-    </>
+    <span class="project-visual__scene" aria-hidden="true">{scene}</span>
   )}
 </div>

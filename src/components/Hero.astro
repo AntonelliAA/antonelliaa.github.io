@@ -10,13 +10,13 @@ const t = useTranslations(lang);
 
 <section class="hero" id="hero">
   <div class="container hero__intro">
-    <p class="hero__eyebrow">{lang === 'pt-br' ? 'DESENVOLVEDOR iOS · PORTO ALEGRE' : 'iOS DEVELOPER · PORTO ALEGRE'}</p>
+    <p class="hero__eyebrow">{t('hero.eyebrow')}</p>
     <h1>Anthony<br />Antonelli<span aria-hidden="true">.</span></h1>
     <div class="hero__summary">
       <p class="hero__role">{t('hero.title')}</p>
       <div class="hero__summary-right">
         <p>{t('hero.description')}</p>
-        <a class="text-link text-link--light" href="#projects">{t('hero.cta.projects')} <span aria-hidden="true">↗</span></a>
+        <a class="text-link text-link--light" href="#projects">{t('hero.cta.projects')} <span aria-hidden="true">↓</span></a>
       </div>
     </div>
   </div>
@@ -24,12 +24,12 @@ const t = useTranslations(lang);
     <div class="hero__product-inner container">
       <div class="hero__product-word" aria-hidden="true">Palco</div>
       <div class="hero__phones">
-        <ProjectVisual lang={lang} slot="palco-gravacao" project="Palco" scene={lang === 'pt-br' ? 'Gravação' : 'Recording'} shape="portrait" className="hero__phone hero__phone--back" priority />
-        <ProjectVisual lang={lang} slot="palco-analise" project="Palco" scene={lang === 'pt-br' ? 'Análise da fala' : 'Speech analysis'} shape="portrait" className="hero__phone hero__phone--front" priority />
+        <ProjectVisual lang={lang} slot="palco-gravacao" project="Palco" scene={t('proj.3.scene.recording')} shape="portrait" className="hero__phone hero__phone--back" priority />
+        <ProjectVisual lang={lang} slot="palco-analise" project="Palco" scene={t('proj.3.scene.analysis')} shape="portrait" className="hero__phone hero__phone--front" priority />
       </div>
       <div class="hero__product-caption">
-        <span>01 / PALCO</span>
-        <span>{lang === 'pt-br' ? 'App independente na App Store' : 'Independent app on the App Store'}</span>
+        <span>Palco</span>
+        <span>{t('hero.caption')}</span>
       </div>
     </div>
   </div>

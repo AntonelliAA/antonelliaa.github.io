@@ -1,6 +1,6 @@
 # Imagens dos projetos
 
-Os 17 arquivos WebP desta pasta vieram das páginas públicas oficiais dos respectivos apps na App Store em 29 de outubro de 2026. Anthony autorizou expressamente o uso dessas imagens no portfólio. São ícones e imagens de apresentação das listagens; algumas podem conter composições promocionais. Após a revisão visual, eles ficaram arquivados e não são exibidos no site atual.
+Os 17 arquivos WebP desta pasta vieram das páginas públicas oficiais dos respectivos apps na App Store em 29 de outubro de 2026. Anthony autorizou expressamente o uso dessas imagens no portfólio. São ícones e imagens de apresentação das listagens; algumas podem conter composições promocionais. O site as usa enquanto as capturas finais de `../portfolio-visuals/` não chegam.
 
 | Produto | Página de origem | Arquivos locais |
 |---|---|---|
@@ -11,6 +11,6 @@ Os 17 arquivos WebP desta pasta vieram das páginas públicas oficiais dos respe
 | Freela onTap: Empresas | [App Store](https://apps.apple.com/br/app/freela-ontap-empresas/id6818285624) | `freela-business-icon.webp`, `freela-business.webp`, `freela-business-registration.webp` |
 | Freela onTap: Vagas e Turnos | [App Store](https://apps.apple.com/br/app/freela-ontap-vagas-e-turnos/id6818288726) | `freela-worker-icon.webp`, `freela-worker.webp`, `freela-worker-registration.webp` |
 
-`ProjectVisual.astro` usa as imagens finais de [../portfolio-visuals/README.md](../portfolio-visuals/README.md) quando elas forem adicionadas. Até lá, mostra espaços reservados. As duas páginas Freela onTap mostravam disponibilidade prevista para 16 de novembro de 2026 na data da importação. O portfólio as distingue dos quatro apps já lançados.
+`ProjectVisual.astro` usa as imagens finais de [../portfolio-visuals/README.md](../portfolio-visuals/README.md) quando elas forem adicionadas. Até lá, mostra a imagem desta pasta indicada em `storeFallback`. As duas páginas Freela onTap mostravam disponibilidade prevista para 16 de novembro de 2026 na data da importação. O portfólio as distingue dos quatro apps já lançados.
 
 Ao importar capturas finais, registre a origem e data em [docs/2026-10-29-assets-to-import.md](../../../docs/2026-10-29-assets-to-import.md). Em capturas próprias, remova dados privados de ensaios, pedidos, empresas e candidaturas. Confira as imagens nas rotas `/` e `/pt-br/`, em desktop e celular.
