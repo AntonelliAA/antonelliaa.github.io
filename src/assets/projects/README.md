@@ -1,36 +1,18 @@
-# Project screenshots
+# Imagens dos projetos
 
-Drop a screenshot here and it appears on the matching project card. No code
-change needed — `Projects.astro` globs this directory and matches on filename.
+Os 17 arquivos WebP desta pasta vieram das páginas públicas oficiais dos respectivos apps na App Store em 29 de outubro de 2026. Anthony autorizou expressamente o uso dessas imagens no portfólio. São ícones e imagens de apresentação das listagens; algumas podem conter composições promocionais. Hoje o site usa daqui só os ícones; as telas vêm de `../portfolio-visuals/`, exportadas do Figma.
 
-## Filenames
+| Produto | Página de origem | Arquivos locais |
+|---|---|---|
+| Palco | [App Store](https://apps.apple.com/br/app/palco-orat%C3%B3ria-e-apresenta%C3%A7%C3%A3o/id6796434989) | `palco-icon.webp`, `palco-recording.webp`, `palco-transcript.webp`, `palco-metrics.webp` |
+| Boraa | [App Store](https://apps.apple.com/br/app/boraa/id6752790553) | `boraa-icon.webp` |
+| Rise of the Lich King | [App Store](https://apps.apple.com/br/app/rise-of-the-lich-king/id6760662821) | `rise-icon.webp`, `rise-title.webp`, `rise-gameplay.webp` |
+| odinPedidos | [App Store](https://apps.apple.com/br/app/odin-pedidos/id6755982771) | `odin-icon.webp`, `odin-orders.webp`, `odin-detail.webp` |
+| Freela onTap: Empresas | [App Store](https://apps.apple.com/br/app/freela-ontap-empresas/id6818285624) | `freela-business-icon.webp`, `freela-business.webp`, `freela-business-registration.webp` |
+| Freela onTap: Vagas e Turnos | [App Store](https://apps.apple.com/br/app/freela-ontap-vagas-e-turnos/id6818288726) | `freela-worker-icon.webp`, `freela-worker.webp`, `freela-worker-registration.webp` |
 
-The basename must equal the project's `slug` in `src/components/Projects.astro`:
+`ProjectVisual.astro` usa as imagens finais de [../portfolio-visuals/README.md](../portfolio-visuals/README.md) quando elas forem adicionadas. Até lá, mostra a imagem desta pasta indicada em `storeFallback`. As duas páginas Freela onTap mostravam disponibilidade prevista para 16 de novembro de 2026 na data da importação. O portfólio as distingue dos quatro apps já lançados.
 
-| File | Project |
-|---|---|
-| `rise-of-the-lich-king.png` | Rise of the Lich King |
-| `odinpedidos.png` | odinPedidos |
-| `boraa.png` | Boraa |
+Ao importar capturas finais, registre a origem e data em [docs/2026-10-29-assets-to-import.md](../../../docs/2026-10-29-assets-to-import.md). Em capturas próprias, remova dados privados de ensaios, pedidos, empresas e candidaturas. Confira as imagens nas rotas `/` e `/pt-br/`, em desktop e celular.
 
-`.png`, `.jpg`, `.jpeg` and `.webp` all work. Astro converts and resizes at
-build time, so commit the original, not a hand-optimised copy.
-
-## What to put in them
-
-One screenshot per app, in an official device frame. Frames are in
-[Apple Design Resources](https://developer.apple.com/design/resources/).
-
-Pick the screen that best shows what the app does — not the login screen, not
-the splash. The App Store Connect listing already has approved screenshots; the
-fastest route is reusing the first one from there.
-
-Aim for around 1200px wide before framing. The card renders at 150px, and
-Astro generates the smaller variants.
-
-## Why they matter
-
-This is the highest-value item in the audit. See
-[docs/05-auditoria-e-plano.md](../../../docs/05-auditoria-e-plano.md) — a
-portfolio for an iOS developer with no picture of any app leaves the strongest
-asset on the table.
+`caronas-icone.webp` e `inshelf-icone.webp` vêm dos próprios repositórios (Caronas: `public/icon-512.png`; InShelf: `AppIcon.appiconset/App Icon - Light.png`) e aparecem na seção "Feito com Claude e Codex".

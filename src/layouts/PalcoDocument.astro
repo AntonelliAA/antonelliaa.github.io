@@ -7,24 +7,43 @@ const { title } = Astro.props.frontmatter;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={title} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <style>
-      :root { color-scheme: light dark; font-family: system-ui, sans-serif; line-height: 1.65; }
-      body { max-width: 74ch; margin: 0 auto; padding: 1.5rem; }
-      nav { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
-      a { color: #2869c7; }
-      h1 { line-height: 1.2; }
-      h2 { margin-top: 2.5rem; border-top: 1px solid #8888; padding-top: 1.5rem; }
-      h3 { margin-top: 1.75rem; }
-      @media (prefers-color-scheme: dark) { a { color: #88b9ff; } }
+      :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif; line-height: 1.68; background: #fffaf6; color: #2a211d; }
+      * { box-sizing: border-box; }
+      body { margin: 0; }
+      a { color: #95401f; text-underline-offset: 3px; }
+      a:focus-visible { outline: 3px solid #d9682f; outline-offset: 3px; }
+      header { border-bottom: 1px solid #e6d9d0; }
+      .bar { max-width: 82ch; margin: 0 auto; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+      .brand { color: #2a211d; font-size: 1.1rem; font-weight: 750; letter-spacing: -.05em; text-decoration: none; }
+      .brand span { color: #bd4b20; }
+      nav { display: flex; flex-wrap: wrap; gap: 12px 24px; font-size: .82rem; }
+      main { max-width: 82ch; margin: 0 auto; padding: 72px 24px 130px; }
+      h1, h2, h3 { line-height: 1.15; letter-spacing: -.04em; }
+      h1 { max-width: 17ch; margin: 0 0 32px; font-size: clamp(2.5rem, 6vw, 4.5rem); }
+      h2 { margin-top: 58px; padding-top: 25px; border-top: 1px solid #e1d5cd; font-size: 1.5rem; }
+      h3 { margin-top: 28px; font-size: 1.15rem; }
+      p, li { color: #554941; }
+      p { margin: 18px 0; }
+      li { margin: 8px 0; }
+      footer { max-width: 82ch; margin: 0 auto; padding: 25px 24px 50px; border-top: 1px solid #e1d5cd; color: #756b65; font-size: .78rem; }
+      @media (max-width: 560px) { .bar { align-items: flex-start; flex-direction: column; } main { padding-top: 48px; } }
     </style>
   </head>
   <body>
-    <nav aria-label="Documentos do Palco">
-      <a href="/palco/privacy/">Privacidade / Privacy</a>
-      <a href="/palco/terms/">Termos / Terms</a>
-      <a href="/palco/support/">Suporte / Support</a>
-    </nav>
+    <header>
+      <div class="bar">
+        <a class="brand" href="/pt-br/">Palco<span>.</span></a>
+        <nav aria-label="Documentos do Palco">
+          <a href="/palco/privacy/">Privacidade / Privacy</a>
+          <a href="/palco/terms/">Termos / Terms</a>
+          <a href="/palco/support/">Suporte / Support</a>
+        </nav>
+      </div>
+    </header>
     <main><slot /></main>
+    <footer>© {new Date().getFullYear()} Palco · Anthony Antonelli Andrade</footer>
   </body>
 </html>

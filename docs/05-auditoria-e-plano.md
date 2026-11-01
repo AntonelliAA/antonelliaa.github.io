@@ -1,6 +1,6 @@
-# Auditoria do site atual e plano de melhoria
+# Auditoria histórica do portfólio — agosto de 2026
 
-Estado avaliado: commit `cc50a20`, branch `main`.
+Estado avaliado: commit `cc50a20`, branch `main`. **Arquivo histórico:** não descreve o design nem o catálogo de apps em outubro de 2026. Veja [03-design.md](03-design.md) para a direção atual e [2026-10-29-assets-to-import.md](2026-10-29-assets-to-import.md) para os arquivos pendentes.
 
 > **Status em 3 de agosto de 2026.** P0, P1 e P2 executados, exceto os itens
 > que dependem de arquivo que só você tem (screenshots, foto) ou de terceiro
@@ -21,7 +21,7 @@ Os dois problemas são:
    lacuna número um. Você tem o produto mais visual possível e ele está
    descrito em texto.
 2. **A casca visual é genérica.** Sete dos treze sinais de "site gerado por IA"
-   estão presentes, detalhados em [03-design.md](03-design.md). O conteúdo é
+   estão presentes, detalhados no documento de design de agosto. O conteúdo é
    honesto, a embalagem não parece.
 
 Mais seis defeitos técnicos concretos, um deles quebrando o preview de link
@@ -76,7 +76,7 @@ Dois a três dias. Depois disso o site sustenta uma entrevista.
 | # | O quê | Por quê | Esforço |
 |---|---|---|---|
 | 16 | **Case study do odinPedidos** em página própria | O item que mais separa você de outro candidato júnior. Estrutura em [02-conteudo.md](02-conteudo.md#case-study-quando-vale-a-pena) | 1–2 dias |
-| 17 | Seção "Publicado" como log de release (versão, app, data, link) | Elemento assinatura. Ver [03-design.md](03-design.md#elemento-assinatura) | 4 h |
+| 17 | Seção "Publicado" como log de release (versão, app, data, link) | Elemento assinatura. Proposta de agosto, não adotada no site atual | 4 h |
 | 18 | Light mode + toggle | Dark permanente é sinal por si só | 3 h |
 | 19 | Reordenar projetos: três publicados em destaque, dois acadêmicos num bloco menor | Três bem feitos superam dez rasos | 2 h |
 | 20 | Página 404 | Hoje o GitHub Pages devolve a genérica | 30 min |
@@ -86,7 +86,7 @@ Dois a três dias. Depois disso o site sustenta uma entrevista.
 
 | # | O quê | Ressalva |
 |---|---|---|
-| 22 | Redesign completo para a direção clara em [03-design.md](03-design.md#parte-2--direção-proposta) | Só vale se você quiser. A opção de manter o dark corrigido está na Parte 3 daquele doc |
+| 22 | Redesign completo para a direção clara proposta em agosto | Só vale se você quiser. A opção de manter o dark corrigido está na Parte 3 daquele doc |
 | 23 | Notas técnicas / blog | Um post de 2025 parado é pior que nenhum post |
 | 24 | Vídeo curto do fluxo dos apps | Depois dos screenshots, não antes |
 
@@ -101,7 +101,7 @@ Tudo que não foi feito, e por quê.
 | 16 | Case study do odinPedidos | Depende de informação que só você tem: qual era a operação antes, por que React Native e não nativo, o que se perdeu nessa escolha |
 | 17 | Log de releases | Precisa de número de versão e data reais do App Store Connect. Inventar destruiria o único valor que a seção teria |
 | 21 | Recomendação nomeada | Depende de terceiro |
-| 22 | Redesign completo (direção clara) | Decisão sua. A rota alternativa da [Parte 3 do doc de design](03-design.md#parte-3--se-preferir-manter-o-dark) foi executada: o dark ficou, sem os sinais genéricos |
+| 22 | Redesign completo (direção clara) | Decisão sua. A rota alternativa estudada em agosto foi executada: o dark ficou, sem os sinais genéricos |
 | 23 | Blog / notas técnicas | Só começa se for manter |
 
 Três bullets de Experiência foram adensados sem número porque não havia número

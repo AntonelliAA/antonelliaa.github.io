@@ -1,85 +1,22 @@
 ---
 import type { Lang } from '../i18n/ui';
 import { useTranslations } from '../i18n/utils';
-
-interface Props {
-  lang: Lang;
-}
-
+interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-
-const highlights = [
-  { title: t('about.highlight.appstore'), desc: t('about.highlight.appstore.desc') },
-  { title: t('about.highlight.hackathon'), desc: t('about.highlight.hackathon.desc') },
-  { title: t('about.highlight.experience'), desc: t('about.highlight.experience.desc') },
-  { title: t('about.highlight.international'), desc: t('about.highlight.international.desc') },
-];
 ---
 
-<section class="section about" id="about">
-  <div class="container">
-    <div class="reveal">
-      <span class="section-label">{t('about.label')}</span>
-      <h2 class="section-title">{t('about.title')}</h2>
+<section class="about section" id="about" aria-labelledby="about-title">
+  <div class="container about__grid">
+    <div>
+      <p class="eyebrow">{t('about.label')}</p>
+      <h2 class="display" id="about-title">{t('about.title')}</h2>
     </div>
-
-    <div class="about__content reveal">
-      <p class="about__text">{t('about.p1')}</p>
-      <p class="about__text">{t('about.p2')}</p>
+    <div class="about__body">
+      <p class="about__facts">{t('about.facts')}</p>
+      <p>{t('about.p1')}</p>
+      <p>{t('about.p2')}</p>
+      <p>{t('about.p3')}</p>
     </div>
-
-    <dl class="about__highlights">
-      {highlights.map((h, i) => (
-        <div class="about__row reveal" style={`transition-delay: ${i * 80}ms`}>
-          <dt class="about__row-title">{h.title}</dt>
-          <dd class="about__row-desc">{h.desc}</dd>
-        </div>
-      ))}
-    </dl>
   </div>
 </section>
-
-<style>
-  .about__content {
-    max-width: 640px;
-    margin-bottom: 3rem;
-  }
-
-  .about__text {
-    font-size: 1rem;
-    color: var(--text-secondary);
-    line-height: 1.8;
-    margin-bottom: 1rem;
-  }
-
-  .about__highlights {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0 3rem;
-  }
-
-  .about__row {
-    padding: 1.1rem 0;
-    border-top: 1px solid var(--border);
-  }
-
-  .about__row-title {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 0.3rem;
-  }
-
-  .about__row-desc {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
-  }
-
-  @media (max-width: 600px) {
-    .about__highlights {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>

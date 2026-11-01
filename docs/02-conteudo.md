@@ -1,4 +1,6 @@
-# Conteúdo: o que colocar e como escrever
+# Conteúdo: pesquisa histórica de agosto de 2026
+
+> Este documento registra uma proposta anterior. O Boraa ficou fora do ar em agosto de 2026, mas sua [página na App Store](https://apps.apple.com/br/app/boraa/id6752790553) voltou a estar disponível na verificação de 29 de outubro de 2026. Palco foi lançado e duas páginas Freela onTap têm disponibilidade prevista para novembro. Para o conteúdo atual, use [03-design.md](03-design.md) e `src/i18n/ui.ts`.
 
 ## Foto: sim ou não
 

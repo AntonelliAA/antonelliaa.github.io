@@ -1,30 +1,16 @@
-# docs/ — Pesquisa e diretrizes do portfolio
+# Documentação do portfólio
 
-Material coletado para decidir o que colocar, o que cortar e como o site deve
-parecer. Escrito em agosto de 2026.
+O site é um portfólio de produtos iOS. A direção atual, os fatos e as regras de uso das imagens estão nos três primeiros links abaixo. As pesquisas de agosto de 2026 permanecem como histórico.
 
-| Arquivo | O que tem dentro |
+| Arquivo | Uso |
 |---|---|
-| [01-pesquisa-contratacao.md](01-pesquisa-contratacao.md) | Quem realmente abre um portfolio, quando, e o que procura. Fontes de primeira mão (Blind, ex-recruiters Google). |
-| [02-conteudo.md](02-conteudo.md) | O que colocar em cada seção, como escrever bullets, foto ou não, case studies. |
-| [03-design.md](03-design.md) | Direção visual, checklist anti-"cara de IA", tipografia, cor, movimento. |
-| [04-tecnico.md](04-tecnico.md) | Performance, acessibilidade, SEO, i18n. Checklist verificável. |
-| [05-auditoria-e-plano.md](05-auditoria-e-plano.md) | Auditoria do site como está hoje + plano priorizado P0/P1/P2. |
-| [referencias.md](referencias.md) | Todos os links, com nota de confiabilidade de cada um. |
+| [03-design.md](03-design.md) | Direção atual do rebranding, hierarquia, fatos e critérios visuais. |
+| [2026-10-29-assets-to-import.md](2026-10-29-assets-to-import.md) | Inventário de imagens disponíveis e pendências de importação. |
+| [src/assets/projects/README.md](../src/assets/projects/README.md) | Proveniência, privacidade e uso dos assets dos projetos. |
+| [01-pesquisa-contratacao.md](01-pesquisa-contratacao.md) | Pesquisa histórica sobre quem visita o portfólio. |
+| [02-conteudo.md](02-conteudo.md) | Proposta histórica de conteúdo; nomes e status de apps estão desatualizados. |
+| [04-tecnico.md](04-tecnico.md) | Pesquisa técnica sobre performance, acessibilidade, SEO e i18n. |
+| [05-auditoria-e-plano.md](05-auditoria-e-plano.md) | Auditoria histórica do site de agosto de 2026. |
+| [referencias.md](referencias.md) | Fontes consultadas na pesquisa anterior. |
 
-## Aviso sobre a qualidade das fontes
-
-Boa parte do que sai numa busca por "developer portfolio best practices 2026" é
-conteúdo de SEO farm, com estatísticas que não têm origem rastreável ("73% dos
-hiring managers...", "65% dos devs..."). Não usei esses números como base para
-nenhuma recomendação e marquei onde aparecem.
-
-O que tem peso aqui é: relato direto de engenheiro/manager de FAANG (Blind),
-conselho publicado por ex-recruiter do Google com nome e cara, e os padrões
-técnicos (WCAG, schema.org, Lighthouse) que são verificáveis rodando a
-ferramenta. O resto é opinião, e está marcado como opinião.
-
-## Como usar
-
-Comece por [05-auditoria-e-plano.md](05-auditoria-e-plano.md). Os outros
-arquivos são a justificativa de cada item do plano.
+Fatos de produto e datas mudam. Antes de publicar, confira os links das lojas e compare os textos em `src/i18n/ui.ts` com as fontes atuais.

@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets';
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+import clawd from '../assets/brand/clawd.svg?raw';
+import codex from '../assets/brand/codex.webp';
+import palcoIcon from '../assets/projects/palco-icon.webp';
+import caronasIcon from '../assets/projects/caronas-icone.webp';
+import inshelfIcon from '../assets/projects/inshelf-icone.webp';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Clawd sits next to its name, so the drawing itself stays out of the accessibility tree.
+const clawdArt = clawd.replace(/<title>.*?<\/title>/, '').replace('<svg ', '<svg aria-hidden="true" focusable="false" ');
+const projects = [
+  { name: 'Palco', description: t('ai.palco.desc'), status: t('ai.palco.status'), icon: palcoIcon, link: '#palco', linkLabel: t('ai.palco.link'), external: false },
+  { name: 'Caronas', description: t('ai.caronas.desc'), status: t('ai.caronas.status'), icon: caronasIcon, link: 'https://github.com/AntonelliAA/Caronas', linkLabel: t('ai.code'), external: true },
+  { name: 'InShelf', description: t('ai.inshelf.desc'), status: t('ai.inshelf.status'), icon: inshelfIcon, link: 'https://github.com/AntonelliAA/InShelf', linkLabel: t('ai.code'), external: true },
+];
+---
+
+<section class="agents section" id="agents" aria-labelledby="agents-title">
+  <div class="container section-head section-head--flush agents__head">
+    <p class="eyebrow">{t('ai.label')}</p>
+    <h2 class="display" id="agents-title">{t('ai.title')}</h2>
+    <p class="lead">{t('ai.intro')}</p>
+  </div>
+
+  <ul class="container agents__team">
+    <li class="agents__member agents__member--clawd">
+      <span class="agents__mascot" set:html={clawdArt} />
+      <h3>Claude Code</h3>
+      <p>{t('ai.claude.role')}</p>
+    </li>
+    <li class="agents__member agents__member--codex">
+      <span class="agents__mascot"><Image src={codex} alt="" width={320} height={320} /></span>
+      <h3>Codex</h3>
+      <p>{t('ai.codex.role')}</p>
+    </li>
+  </ul>
+
+  <h3 class="container agents__subtitle">{t('ai.projects')}</h3>
+  <ul class="container agents__gallery">
+    {projects.map((project) => <li class="agents__tile">
+      <div class="agents__art"><Image src={project.icon} alt="" width={240} height={240} /></div>
+      <p class="agents__caption"><strong>{project.name}.</strong> {project.description}</p>
+      <p class="agents__status">{project.status}</p>
+      <a class="text-link" href={project.link} {...(project.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{project.linkLabel} <span aria-hidden="true">›</span></a>
+    </li>)}
+  </ul>
+</section>
