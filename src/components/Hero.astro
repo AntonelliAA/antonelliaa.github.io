@@ -2,12 +2,16 @@
 import type { Lang } from '../i18n/ui';
 import { useTranslations } from '../i18n/utils';
 import { splitLead } from '../lib/text';
+import { Image } from 'astro:assets';
 import ProjectVisual from './ProjectVisual.astro';
+import clawd from '../assets/brand/clawd.svg?raw';
+import codex from '../assets/brand/codex.webp';
 
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const [hook, rest] = splitLead(t('hero.description'));
+const clawdArt = clawd.replace(/<title>.*?<\/title>/, '').replace('<svg ', '<svg aria-hidden="true" focusable="false" ');
 ---
 
 <section class="hero" id="hero">
@@ -19,9 +23,14 @@ const [hook, rest] = splitLead(t('hero.description'));
       <a class="button" href="#contact">{t('hero.cta.contact')}</a>
       <a class="text-link" href="#projects">{t('hero.cta.projects')} <span aria-hidden="true">›</span></a>
     </div>
+    <a class="hero__agents" href="#agents">
+      <span class="hero__mascot" set:html={clawdArt} />
+      <Image class="hero__mascot" src={codex} alt="" width={64} height={64} />
+      <span>{t('hero.agents')} <span aria-hidden="true">›</span></span>
+    </a>
   </div>
   <div class="phones hero__phones">
-    <ProjectVisual lang={lang} slot="palco-gravacao" project="Palco" scene={t('proj.3.scene.recording')} shape="portrait" className="phone phone--low" priority />
-    <ProjectVisual lang={lang} slot="palco-analise" project="Palco" scene={t('proj.3.scene.analysis')} shape="portrait" className="phone" priority />
+    <ProjectVisual lang={lang} slot="palco-inicio" project="Palco" scene={t('proj.3.scene.home')} shape="portrait" className="phone phone--low" priority />
+    <ProjectVisual lang={lang} slot="palco-historico" project="Palco" scene={t('proj.3.scene.history')} shape="portrait" className="phone" priority />
   </div>
 </section>

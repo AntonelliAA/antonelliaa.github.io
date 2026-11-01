@@ -19,9 +19,9 @@ const t = useTranslations(lang);
 
 // Final captures in portfolio-visuals/ win; until one arrives, the App Store listing image stands in.
 const storeFallback: Record<string, string> = {
-  'palco-gravacao': 'palco-recording',
-  'palco-analise': 'palco-metrics',
-  'palco-transcricao': 'palco-transcript',
+  'palco-inicio': 'palco-recording',
+  'palco-historico': 'palco-metrics',
+  'palco-historico-diagonal': 'palco-transcript',
   'freela-empresas': 'freela-business',
   'freela-vagas': 'freela-worker',
   'rise-abertura': 'rise-title',
@@ -34,7 +34,7 @@ const finals = import.meta.glob('../assets/portfolio-visuals/*.{png,jpg,jpeg,web
 const store = import.meta.glob('../assets/projects/*.webp', { eager: true, import: 'default' }) as Record<string, ImageMetadata>;
 const byName = (files: Record<string, ImageMetadata>, name?: string) =>
   name ? Object.entries(files).find(([path]) => path.split('/').pop()?.replace(/\.[^.]+$/, '') === name)?.[1] : undefined;
-// A localized capture (`palco-gravacao.en`) wins over the shared one for that language.
+// A localized capture (`palco-inicio.en`) wins over the shared one for that language.
 const image = (lang === 'en' ? byName(finals, `${slot}.en`) : undefined) ?? byName(finals, slot) ?? byName(store, storeFallback[slot]);
 const alt = `${project}: ${scene}`;
 ---

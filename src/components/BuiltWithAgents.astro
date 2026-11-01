@@ -22,17 +22,26 @@ const projects = [
 ---
 
 <section class="agents section" id="agents" aria-labelledby="agents-title">
-  <div class="container agents__head">
-    <div class="section-head section-head--flush">
-      <p class="eyebrow">{t('ai.label')}</p>
-      <h2 class="display" id="agents-title">{t('ai.title')}</h2>
-      <p class="lead">{t('ai.intro')}</p>
-    </div>
-    <ul class="agents__team">
-      <li><span class="agents__mascot agents__mascot--clawd" set:html={clawdArt} />Claude Code</li>
-      <li><span class="agents__mascot"><Image src={codex} alt="" width={160} height={160} /></span>Codex</li>
-    </ul>
+  <div class="container section-head section-head--flush agents__head">
+    <p class="eyebrow">{t('ai.label')}</p>
+    <h2 class="display" id="agents-title">{t('ai.title')}</h2>
+    <p class="lead">{t('ai.intro')}</p>
   </div>
+
+  <ul class="container agents__team">
+    <li class="agents__member agents__member--clawd">
+      <span class="agents__mascot" set:html={clawdArt} />
+      <h3>Claude Code</h3>
+      <p>{t('ai.claude.role')}</p>
+    </li>
+    <li class="agents__member agents__member--codex">
+      <span class="agents__mascot"><Image src={codex} alt="" width={320} height={320} /></span>
+      <h3>Codex</h3>
+      <p>{t('ai.codex.role')}</p>
+    </li>
+  </ul>
+
+  <h3 class="container agents__subtitle">{t('ai.projects')}</h3>
   <ul class="container agents__gallery">
     {projects.map((project) => <li class="agents__tile">
       <div class="agents__art"><Image src={project.icon} alt="" width={240} height={240} /></div>

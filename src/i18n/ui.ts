@@ -21,6 +21,7 @@ export const ui = {
 
     // Nav
     'nav.projects': 'Projects',
+    'nav.ai': 'AI',
     'nav.backend': 'Backend',
     'nav.about': 'About',
     'nav.experience': 'Experience',
@@ -33,6 +34,7 @@ export const ui = {
     'hero.cta.contact': 'Get in touch',
     'hero.cta.projects': 'See the apps',
     'hero.cta.cv': 'Download CV',
+    'hero.agents': 'How I build with Claude Code and Codex',
 
     // Projects
     'proj.label': 'Projects',
@@ -57,9 +59,8 @@ export const ui = {
     'proj.3.lead': 'Practice a talk and see what to improve.',
     'proj.3.desc': "Record a rehearsal on your iPhone. Palco measures pace, pauses and filler words, and the audio never leaves the device. I built it alone.",
     'proj.3.stack': 'Swift 6, SwiftUI and on-device speech recognition.',
-    'proj.3.scene.recording': 'Recording a rehearsal',
-    'proj.3.scene.analysis': 'Speech analysis',
-    'proj.3.scene.transcript': 'Transcript with filler words',
+    'proj.3.scene.home': 'Home, with the focus for the next rehearsal',
+    'proj.3.scene.history': 'History of rehearsals and progress',
 
     'proj.4.name': 'Bah Inovação',
     'proj.4.desc': "For this civic innovation platform, I designed about 90% of the interface in Figma, modeled the PostgreSQL schema and built REST endpoints.",
@@ -101,7 +102,10 @@ export const ui = {
     'backend.plugways.where': 'Plugways Digital, 2023',
 
     // Built with agents
-    'ai.label': 'Personal projects',
+    'ai.label': 'AI',
+    'ai.claude.role': 'Follows the CLAUDE.md rules I write for each project.',
+    'ai.codex.role': 'Follows the AGENTS.md rules, with the same build and tests.',
+    'ai.projects': 'What we built together',
     'ai.title': 'Built with agents.',
     'ai.intro': "Claude Code and Codex work as part of the team. I write the spec and the rules for each project, the agents implement, and I review every change. Nothing ships until tests and the build pass.",
     'ai.code': 'Source code',
@@ -199,6 +203,7 @@ export const ui = {
 
     // Nav
     'nav.projects': 'Projetos',
+    'nav.ai': 'IA',
     'nav.backend': 'Backend',
     'nav.about': 'Sobre',
     'nav.experience': 'Experiência',
@@ -211,6 +216,7 @@ export const ui = {
     'hero.cta.contact': 'Entrar em contato',
     'hero.cta.projects': 'Ver os apps',
     'hero.cta.cv': "Baixar currículo",
+    'hero.agents': 'Como construo com o Claude Code e o Codex',
 
     // Projects
     'proj.label': 'Projetos',
@@ -235,9 +241,8 @@ export const ui = {
     'proj.3.lead': 'Treine uma apresentação e veja onde melhorar.',
     'proj.3.desc': "Grave o ensaio no iPhone. O Palco mede ritmo, pausas e vícios de linguagem, e o áudio nunca sai do aparelho. Construí o app sozinho.",
     'proj.3.stack': 'Swift 6, SwiftUI e reconhecimento de fala no próprio aparelho.',
-    'proj.3.scene.recording': 'Gravação de um ensaio',
-    'proj.3.scene.analysis': 'Análise da fala',
-    'proj.3.scene.transcript': 'Transcrição com vícios de linguagem',
+    'proj.3.scene.home': 'Início, com o foco do próximo ensaio',
+    'proj.3.scene.history': 'Histórico de ensaios e evolução',
 
     'proj.4.name': 'Bah Inovação',
     'proj.4.desc': "Nessa plataforma de inovação cívica, desenhei cerca de 90% da interface no Figma, modelei o schema PostgreSQL e construí endpoints REST.",
@@ -279,7 +284,10 @@ export const ui = {
     'backend.plugways.where': 'Plugways Digital, 2023',
 
     // Built with agents
-    'ai.label': 'Projetos pessoais',
+    'ai.label': 'IA',
+    'ai.claude.role': 'Segue as regras do CLAUDE.md que escrevo para cada projeto.',
+    'ai.codex.role': 'Segue as regras do AGENTS.md, com o mesmo build e os mesmos testes.',
+    'ai.projects': 'O que construímos juntos',
     'ai.title': 'Feitos com agentes.',
     'ai.intro': "O Claude Code e o Codex trabalham como parte do time. Eu escrevo a especificação e as regras de cada projeto, os agentes implementam, e reviso cada mudança. Nada vai ao ar antes de testes e build passarem.",
     'ai.code': 'Código-fonte',

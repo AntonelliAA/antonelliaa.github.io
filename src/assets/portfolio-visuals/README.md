@@ -2,11 +2,12 @@
 
 As imagens desta pasta foram exportadas em 1 de novembro de 2026 dos arquivos do Figma de cada projeto, que Anthony compartilhou para isso. Elas têm prioridade sobre as imagens da App Store em `../projects/` (o mapa de reserva fica em `storeFallback`, dentro de `ProjectVisual.astro`).
 
-Um arquivo com o sufixo `.en` (por exemplo `palco-gravacao.en.webp`) substitui o arquivo sem sufixo na versão em inglês do site.
+Um arquivo com o sufixo `.en` (por exemplo `palco-inicio.en.webp`) substitui o arquivo sem sufixo na versão em inglês do site.
 
 | Nome do arquivo, sem extensão | Onde aparece | Origem no Figma |
 |---|---|---|
-| `palco-gravacao`, `palco-analise`, `palco-transcricao` (e `.en`) | Abertura e capítulo Palco | Palco — App Store · PT-BR + EN, telas "Real Palco UI" das peças upright |
+| `palco-inicio`, `palco-historico` (e `.en`) | Abertura | Mockups do Palco enviados pelo Anthony em 1 de novembro de 2026 (Início e Histórico, em pé) |
+| `palco-historico-diagonal` (e `.en`) | Capítulo Palco | O mesmo Histórico, na versão deitada |
 | `freela-empresas` | Freela onTap: Empresas | Freela 2.0, "PT - iOS - Empresa 2" |
 | `freela-vagas` | Freela onTap: Vagas e Turnos | Freela 2.0, "PT - iOS - Freelancer 2" |
 | `rise-abertura`, `rise-jogo` | Rise of the Lich King | Game Challange, página App Store (capturas do simulador; o contador de FPS foi cortado da cena de jogo) |
