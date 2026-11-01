@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+import claudeMark from '../assets/brand/claude.svg?raw';
+import openaiMark from '../assets/brand/openai.svg?raw';
+import palcoIcon from '../assets/projects/palco-icon.webp';
+import caronasIcon from '../assets/projects/caronas-icone.webp';
+import inshelfIcon from '../assets/projects/inshelf-icone.webp';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// The marks are decorative next to their names, so the SVG title goes and the color comes from CSS.
+const mark = (svg: string) => svg.replace(/<title>.*?<\/title>/, '').replace(' role="img"', ' aria-hidden="true" focusable="false"');
+const projects = [
+  { name: 'Palco', kind: t('ai.palco.kind'), description: t('ai.palco.desc'), icon: palcoIcon, link: '#palco', linkLabel: t('ai.palco.link'), external: false },
+  { name: 'Caronas', kind: t('ai.caronas.kind'), description: t('ai.caronas.desc'), icon: caronasIcon, link: 'https://github.com/AntonelliAA/Caronas', linkLabel: t('ai.code'), external: true },
+  { name: 'InShelf', kind: t('ai.inshelf.kind'), description: t('ai.inshelf.desc'), icon: inshelfIcon, link: 'https://github.com/AntonelliAA/InShelf', linkLabel: t('ai.code'), external: true },
+];
+---
+
+<section class="agents section" id="agents" aria-labelledby="agents-title">
+  <div class="container agents__head">
+    <div>
+      <p class="kicker">{t('ai.label')}</p>
+      <h2 id="agents-title">{t('ai.title')}</h2>
+    </div>
+    <div class="agents__aside">
+      <p>{t('ai.intro')}</p>
+      <ul class="agents__marks" aria-label={t('ai.marks')}>
+        <li><span class="agents__mark agents__mark--claude" set:html={mark(claudeMark)} />Claude Code</li>
+        <li><span class="agents__mark agents__mark--codex" set:html={mark(openaiMark)} />Codex</li>
+      </ul>
+    </div>
+  </div>
+  <ul class="container agents__list">
+    {projects.map((project) => <li class="agents__card">
+      <Image class="agents__icon" src={project.icon} alt="" width={128} height={128} />
+      <p class="agents__kind">{project.kind}</p>
+      <h3>{project.name}</h3>
+      <p class="agents__description">{project.description}</p>
+      <a class="text-link" href={project.link} {...(project.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{project.linkLabel} <span aria-hidden="true">{project.external ? '↗' : '↑'}</span></a>
+    </li>)}
+  </ul>
+</section>

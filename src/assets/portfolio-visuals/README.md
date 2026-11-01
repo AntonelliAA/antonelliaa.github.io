@@ -1,20 +1,17 @@
 # Imagens finais do portfólio
 
-Enquanto esta pasta não tiver a imagem final de um espaço, o site mostra a imagem da listagem da App Store correspondente, guardada em `../projects/` (o mapa fica em `storeFallback`, dentro de `ProjectVisual.astro`). Basta adicionar arquivos com os nomes abaixo (`.webp`, `.png`, `.jpg`, `.jpeg` ou `.avif`) e reconstruir o site; a imagem final substitui a da App Store automaticamente.
+As imagens desta pasta foram exportadas em 1 de novembro de 2026 dos arquivos do Figma de cada projeto, que Anthony compartilhou para isso. Elas têm prioridade sobre as imagens da App Store em `../projects/` (o mapa de reserva fica em `storeFallback`, dentro de `ProjectVisual.astro`).
 
-| Nome do arquivo, sem extensão | Onde aparece | Proporção sugerida |
+Um arquivo com o sufixo `.en` (por exemplo `palco-gravacao.en.webp`) substitui o arquivo sem sufixo na versão em inglês do site.
+
+| Nome do arquivo, sem extensão | Onde aparece | Origem no Figma |
 |---|---|---|
-| `palco-gravacao` | Abertura e capítulo Palco | vertical, cerca de 9:19,5 |
-| `palco-analise` | Abertura | vertical, cerca de 9:19,5 |
-| `palco-transcricao` | Capítulo Palco | vertical, cerca de 9:19,5 |
-| `freela-empresas` | Freela onTap: Empresas | vertical, cerca de 9:19,5 |
-| `freela-vagas` | Freela onTap: Vagas e Turnos | vertical, cerca de 9:19,5 |
-| `rise-abertura` | Rise of the Lich King, primeira cena | horizontal, cerca de 2,2:1 |
-| `rise-jogo` | Rise of the Lich King, cena de jogo | horizontal, cerca de 2,2:1 |
-| `odin-lista` | odinPedidos, lista | vertical, cerca de 9:19,5 |
-| `odin-detalhes` | odinPedidos, detalhes | vertical, cerca de 9:19,5 |
-| `boraa-icone` | Lista de outros projetos | quadrada, 1:1 |
+| `palco-gravacao`, `palco-analise`, `palco-transcricao` (e `.en`) | Abertura e capítulo Palco | Palco — App Store · PT-BR + EN, telas "Real Palco UI" das peças upright |
+| `freela-empresas` | Freela onTap: Empresas | Freela 2.0, "PT - iOS - Empresa 2" |
+| `freela-vagas` | Freela onTap: Vagas e Turnos | Freela 2.0, "PT - iOS - Freelancer 2" |
+| `rise-abertura`, `rise-jogo` | Rise of the Lich King | Game Challange, página App Store (capturas do simulador; o contador de FPS foi cortado da cena de jogo) |
+| `odin-lista`, `odin-detalhes` | odinPedidos | Odin ERP nov, "Clientes (Bezel)" e "Detalhes do cliente (Bezel)" |
 
-Priorize capturas reais, legíveis e coerentes entre si. As imagens da App Store em `../projects/` têm só 314 px de largura e ficam suaves em telas Retina; capturas próprias com pelo menos 900 px de largura resolvem isso. Antes de adicionar capturas próprias, remova dados pessoais, falas privadas, pedidos e candidaturas reais.
+As telas de celular têm cantos transparentes e mantêm a própria proporção; as peças do Freela são composições completas da App Store. Para trocar uma imagem, exporte com pelo menos 900 px de largura, mantenha o nome e gere o site novamente. Remova dados pessoais, falas privadas, pedidos e candidaturas reais antes de adicionar capturas novas.
 
-Para a prévia de compartilhamento, também podem ser adicionados `og-pt` e `og-en` (1200 × 630 px). Até receber essas duas peças, o site compartilha apenas título e descrição, sem as imagens promocionais antigas.
+Para a prévia de compartilhamento, também podem ser adicionados `og-pt` e `og-en` (1200 × 630 px).

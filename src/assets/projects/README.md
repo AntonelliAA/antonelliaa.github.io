@@ -1,6 +1,6 @@
 # Imagens dos projetos
 
-Os 17 arquivos WebP desta pasta vieram das páginas públicas oficiais dos respectivos apps na App Store em 29 de outubro de 2026. Anthony autorizou expressamente o uso dessas imagens no portfólio. São ícones e imagens de apresentação das listagens; algumas podem conter composições promocionais. O site as usa enquanto as capturas finais de `../portfolio-visuals/` não chegam.
+Os 17 arquivos WebP desta pasta vieram das páginas públicas oficiais dos respectivos apps na App Store em 29 de outubro de 2026. Anthony autorizou expressamente o uso dessas imagens no portfólio. São ícones e imagens de apresentação das listagens; algumas podem conter composições promocionais. Hoje o site usa daqui só os ícones; as telas vêm de `../portfolio-visuals/`, exportadas do Figma.
 
 | Produto | Página de origem | Arquivos locais |
 |---|---|---|
@@ -14,3 +14,5 @@ Os 17 arquivos WebP desta pasta vieram das páginas públicas oficiais dos respe
 `ProjectVisual.astro` usa as imagens finais de [../portfolio-visuals/README.md](../portfolio-visuals/README.md) quando elas forem adicionadas. Até lá, mostra a imagem desta pasta indicada em `storeFallback`. As duas páginas Freela onTap mostravam disponibilidade prevista para 16 de novembro de 2026 na data da importação. O portfólio as distingue dos quatro apps já lançados.
 
 Ao importar capturas finais, registre a origem e data em [docs/2026-10-29-assets-to-import.md](../../../docs/2026-10-29-assets-to-import.md). Em capturas próprias, remova dados privados de ensaios, pedidos, empresas e candidaturas. Confira as imagens nas rotas `/` e `/pt-br/`, em desktop e celular.
+
+`caronas-icone.webp` e `inshelf-icone.webp` vêm dos próprios repositórios (Caronas: `public/icon-512.png`; InShelf: `AppIcon.appiconset/App Icon - Light.png`) e aparecem na seção "Feito com Claude e Codex".

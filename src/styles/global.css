@@ -60,6 +60,9 @@ img { display: block; max-width: 100%; }
 .project-visual__scene { max-width: 10ch; font-size: clamp(1.65rem, 3vw, 3.2rem); line-height: .98; letter-spacing: -.05em; overflow-wrap: anywhere; }
 .project-visual--filled { padding: 0; border: 0; background: none; }
 .project-visual__image { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* Phone captures carry their own device frame and transparent corners, so they keep their own shape. */
+.project-visual--portrait.project-visual--filled { aspect-ratio: auto; border-radius: 0; overflow: visible; }
+.project-visual--portrait.project-visual--filled .project-visual__image { height: auto; }
 .hero__phone--back { --visual-bg: #f2e3d6; --visual-color: #533421; }
 .hero__phone--front { --visual-bg: #bc5129; --visual-color: #fff8f2; }
 
@@ -103,6 +106,8 @@ img { display: block; max-width: 100%; }
 .freela__item { min-width: 0; }
 .freela__image { display: flex; align-items: center; justify-content: center; height: 560px; padding: 36px 0; background: #dfe7e8; }
 .freela__image .project-visual { height: 100%; width: auto; }
+.freela__image .project-visual--filled { overflow: hidden; border-radius: 22px; }
+.freela__image .project-visual--filled .project-visual__image { width: auto; height: 100%; }
 .freela__image--business .project-visual { --visual-bg: #4874eb; --visual-color: #fff; }
 .freela__image--worker .project-visual { --visual-bg: #f86718; --visual-color: #fff; }
 .freela__copy { padding: 28px 0 0; max-width: 500px; }
@@ -146,6 +151,26 @@ img { display: block; max-width: 100%; }
 .work__other-list h4 { font-size: 1.24rem; letter-spacing: -.025em; }
 .work__other-list p { max-width: 70ch; margin-top: 8px; color: #555b60; line-height: 1.6; }
 .work__other-list .text-link { flex: none; color: #a84525; }
+
+/* Personal projects built with coding agents. */
+.agents { background: #f3efe7; color: #211d18; }
+.agents .kicker { color: #9a4a2c; }
+.agents__head { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 70px; align-items: end; }
+.agents__head h2 { max-width: 13ch; margin-top: 18px; font-size: clamp(3.2rem, 5.8vw, 6rem); line-height: 1.01; letter-spacing: -.05em; }
+.agents__aside > p { max-width: 46ch; color: #574e44; font-size: 1.08rem; line-height: 1.65; }
+.agents__marks { display: flex; flex-wrap: wrap; gap: 14px 32px; margin-top: 28px; }
+.agents__marks li { display: inline-flex; align-items: center; gap: 12px; font-size: 1.05rem; font-weight: 650; letter-spacing: -.02em; }
+.agents__mark { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: #fff; box-shadow: 0 0 0 1px #e2dace; }
+.agents__mark svg { width: 24px; height: 24px; fill: currentColor; }
+.agents__mark--claude { color: #d97757; }
+.agents__mark--codex { color: #111; }
+.agents__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 76px; }
+.agents__card { display: flex; flex-direction: column; align-items: flex-start; padding: 32px 30px 26px; border-radius: 24px; background: #fff; box-shadow: 0 0 0 1px #e6dfd3; }
+.agents__icon { width: 64px; height: 64px; border-radius: 15px; box-shadow: 0 0 0 1px rgba(0, 0, 0, .06); }
+.agents__kind { margin-top: 30px; color: #6a5f53; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.agents__card h3 { margin-top: 10px; font-size: clamp(1.7rem, 2.4vw, 2.2rem); line-height: 1.1; letter-spacing: -.045em; }
+.agents__description { flex: 1; margin-top: 12px; color: #574e44; line-height: 1.62; }
+.agents__card .text-link { margin-top: 18px; color: #8d3f22; }
 
 /* Personal context */
 .about { background: #fff; }
@@ -209,6 +234,8 @@ img { display: block; max-width: 100%; }
   .feature__phone { width: 43%; }
   .about__grid { gap: 50px; }
   .skills__columns { column-gap: 40px; }
+  .agents__head { grid-template-columns: 1fr; gap: 28px; }
+  .agents__list { grid-template-columns: 1fr; }
 }
 @media (max-width: 700px) {
   .container { width: min(100% - 36px, 1240px); }

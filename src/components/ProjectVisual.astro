@@ -34,7 +34,8 @@ const finals = import.meta.glob('../assets/portfolio-visuals/*.{png,jpg,jpeg,web
 const store = import.meta.glob('../assets/projects/*.webp', { eager: true, import: 'default' }) as Record<string, ImageMetadata>;
 const byName = (files: Record<string, ImageMetadata>, name?: string) =>
   name ? Object.entries(files).find(([path]) => path.split('/').pop()?.replace(/\.[^.]+$/, '') === name)?.[1] : undefined;
-const image = byName(finals, slot) ?? byName(store, storeFallback[slot]);
+// A localized capture (`palco-gravacao.en`) wins over the shared one for that language.
+const image = (lang === 'en' ? byName(finals, `${slot}.en`) : undefined) ?? byName(finals, slot) ?? byName(store, storeFallback[slot]);
 const alt = `${project}: ${scene}`;
 ---
 

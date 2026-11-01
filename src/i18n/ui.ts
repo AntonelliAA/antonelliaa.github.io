@@ -90,8 +90,8 @@ export const ui = {
     'proj.2.lead': 'Order management for sales reps in the field.',
     'proj.2.desc': "odinPedidos helps sales representatives manage orders. I was its sole mobile developer: I built the screens, integrated the REST API and released it on both stores. It serves 50+ paying clients.",
     'proj.2.stack': 'React Native, Expo, TypeScript',
-    'proj.2.scene.a': 'Orders',
-    'proj.2.scene.b': 'Order details',
+    'proj.2.scene.a': 'Customers',
+    'proj.2.scene.b': 'Customer details',
 
     'proj.3.kind': 'Independent project',
     'proj.3.lead': 'Practice a talk and see what to improve.',
@@ -127,6 +127,20 @@ export const ui = {
     'proj.8.desc': "Boraa helps people discover events with friends. I worked with four other developers on backend routes, deployment, MapKit integration and screens.",
     'proj.8.link.label': 'App Store',
     'proj.8.scene': 'App icon',
+
+    // Built with agents
+    'ai.label': 'Built with Claude and Codex',
+    'ai.title': "Personal projects, built with agents.",
+    'ai.intro': "I write the spec and the project rules, Claude Code and Codex implement, and I review every change before it ships. Tests and the build have to pass first.",
+    'ai.marks': 'Tools',
+    'ai.code': 'Source code',
+    'ai.palco.kind': 'iOS · App Store',
+    'ai.palco.desc': "Rehearse a presentation and get feedback on pace, filler words and pauses.",
+    'ai.palco.link': 'See Palco',
+    'ai.caronas.kind': 'Web · In daily use',
+    'ai.caronas.desc': "Counts carpool rides from each person's weekly schedule. Only absences are marked, and Brazilian holidays are skipped on their own.",
+    'ai.inshelf.kind': 'iOS · In development',
+    'ai.inshelf.desc': "Keeps track of the pantry at home, builds the shopping list and turns what is in stock into recipes.",
 
     // Skills
     'skills.label': 'Skills',
@@ -255,8 +269,8 @@ export const ui = {
     'proj.2.lead': 'Pedidos para representantes em campo.',
     'proj.2.desc': "O odinPedidos ajuda representantes comerciais a gerenciar pedidos. Fui o único dev mobile: fiz as telas, integrei a API REST e publiquei o app nas duas lojas. Atende mais de 50 clientes pagantes.",
     'proj.2.stack': 'React Native, Expo, TypeScript',
-    'proj.2.scene.a': 'Lista de pedidos',
-    'proj.2.scene.b': 'Detalhes do pedido',
+    'proj.2.scene.a': 'Lista de clientes',
+    'proj.2.scene.b': 'Detalhes do cliente',
 
     'proj.3.kind': 'Projeto independente',
     'proj.3.lead': 'Treine uma apresentação e veja onde melhorar.',
@@ -292,6 +306,20 @@ export const ui = {
     'proj.8.desc': "O Boraa ajuda a descobrir eventos com amigos. Trabalhei com outras quatro pessoas nas rotas de backend, no deploy, na integração com MapKit e nas telas.",
     'proj.8.link.label': 'App Store',
     'proj.8.scene': 'Ícone do app',
+
+    // Built with agents
+    'ai.label': 'Feito com Claude e Codex',
+    'ai.title': "Projetos pessoais, feitos com agentes.",
+    'ai.intro': "Eu escrevo a especificação e as regras do projeto, o Claude Code e o Codex implementam, e reviso cada mudança antes de publicar. Testes e build precisam passar antes.",
+    'ai.marks': 'Ferramentas',
+    'ai.code': 'Código-fonte',
+    'ai.palco.kind': 'iOS · App Store',
+    'ai.palco.desc': "Ensaie uma apresentação e receba retorno sobre ritmo, vícios de linguagem e pausas.",
+    'ai.palco.link': 'Ver o Palco',
+    'ai.caronas.kind': 'Web · Em uso diário',
+    'ai.caronas.desc': "Conta as caronas pela agenda semanal de cada pessoa. Só as ausências são marcadas, e os feriados nacionais ficam de fora sozinhos.",
+    'ai.inshelf.kind': 'iOS · Em desenvolvimento',
+    'ai.inshelf.desc': "Organiza a despensa e os mantimentos de casa, monta a lista de compras e transforma o que tem em estoque em receitas.",
 
     // Skills
     'skills.label': 'Tecnologias',
