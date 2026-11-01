@@ -10,36 +10,30 @@ const groups = [
     ['SwiftUI', t('skills.ctx.swiftui')],
     ['UIKit', t('skills.ctx.uikit')],
     ['StoreKit 2', t('skills.ctx.storekit')],
-    ['Core Data / SwiftData', t('skills.ctx.persistence')],
+    ['Core Data, SwiftData', t('skills.ctx.persistence')],
     ['MapKit', t('skills.ctx.mapkit')],
   ] },
   { name: t('skills.group.cross'), items: [
-    ['React Native / Expo', t('skills.ctx.reactnative')],
-    ['TypeScript', t('skills.ctx.typescript')],
+    ['Vapor', t('skills.ctx.vapor')],
     ['Node.js', t('skills.ctx.node')],
-    ['React', t('skills.ctx.react')],
-    ['PostgreSQL / MySQL', t('skills.ctx.sql')],
+    ['PostgreSQL, MySQL', t('skills.ctx.sql')],
+    ['Python', t('skills.ctx.python')],
     ['AWS', t('skills.ctx.aws')],
+    ['React Native, Expo', t('skills.ctx.reactnative')],
+    ['React', t('skills.ctx.react')],
   ] },
 ];
 ---
 
-<section class="skills section" id="skills">
+<section class="skills section" id="skills" aria-labelledby="skills-title">
   <div class="container">
-    <div class="section-heading">
-      <p class="kicker">{t('skills.label')}</p>
-      <h2>{t('skills.title')}</h2>
-      <p>{t('skills.subtitle')}</p>
-    </div>
+    <h2 class="title" id="skills-title">{t('skills.title')}</h2>
+    <p class="skills__subtitle">{t('skills.subtitle')}</p>
     <div class="skills__columns">
-      {groups.map((group) => <div class="skills__column">
+      {groups.map((group) => <div>
         <h3>{group.name}</h3>
         <dl>{group.items.map((item) => <div class="skills__row"><dt>{item[0]}</dt><dd>{item[1]}</dd></div>)}</dl>
       </div>)}
-    </div>
-    <div class="skills__workflow">
-      <h3>{t('skills.ai.label')}</h3>
-      <p>{t('skills.ai.desc')}</p>
     </div>
   </div>
 </section>

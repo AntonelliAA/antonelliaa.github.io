@@ -4,29 +4,19 @@ import { useTranslations } from '../i18n/utils';
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-const facts = [
-  { number: '4', title: t('about.highlight.appstore'), detail: t('about.highlight.appstore.desc') },
-  { number: '2', title: t('about.highlight.preorder'), detail: t('about.highlight.preorder.desc') },
-  { number: '50+', title: t('about.highlight.clients'), detail: t('about.highlight.clients.desc') },
-];
 ---
 
-<section class="about section" id="about">
+<section class="about section" id="about" aria-labelledby="about-title">
   <div class="container about__grid">
     <div>
-      <p class="kicker">{t('about.label')}</p>
-      <h2>{t('about.title')}</h2>
+      <p class="eyebrow">{t('about.label')}</p>
+      <h2 class="display" id="about-title">{t('about.title')}</h2>
     </div>
     <div class="about__body">
+      <p class="about__facts">{t('about.facts')}</p>
       <p>{t('about.p1')}</p>
       <p>{t('about.p2')}</p>
       <p>{t('about.p3')}</p>
     </div>
   </div>
-  <dl class="container facts">
-    {facts.map((fact) => <div class="facts__item">
-      <dt><span>{fact.number}</span>{fact.title}</dt>
-      <dd>{fact.detail}</dd>
-    </div>)}
-  </dl>
 </section>

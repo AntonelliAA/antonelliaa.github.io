@@ -1,36 +1,27 @@
 ---
 import type { Lang } from '../i18n/ui';
 import { useTranslations } from '../i18n/utils';
+import { splitLead } from '../lib/text';
 import ProjectVisual from './ProjectVisual.astro';
 
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+const [hook, rest] = splitLead(t('hero.description'));
 ---
 
 <section class="hero" id="hero">
   <div class="container hero__intro">
-    <p class="hero__eyebrow">{t('hero.eyebrow')}</p>
-    <h1>Anthony<br />Antonelli<span aria-hidden="true">.</span></h1>
-    <div class="hero__summary">
-      <p class="hero__role">{t('hero.title')}</p>
-      <div class="hero__summary-right">
-        <p>{t('hero.description')}</p>
-        <a class="text-link text-link--light" href="#projects">{t('hero.cta.projects')} <span aria-hidden="true">↓</span></a>
-      </div>
+    <p class="eyebrow">Anthony Antonelli</p>
+    <h1 class="display">{t('hero.title')}</h1>
+    <p class="lead"><strong>{hook}</strong> {rest}</p>
+    <div class="actions">
+      <a class="button" href="#contact">{t('hero.cta.contact')}</a>
+      <a class="text-link" href="#projects">{t('hero.cta.projects')} <span aria-hidden="true">›</span></a>
     </div>
   </div>
-  <div class="hero__product">
-    <div class="hero__product-inner container">
-      <div class="hero__product-word" aria-hidden="true">Palco</div>
-      <div class="hero__phones">
-        <ProjectVisual lang={lang} slot="palco-gravacao" project="Palco" scene={t('proj.3.scene.recording')} shape="portrait" className="hero__phone hero__phone--back" priority />
-        <ProjectVisual lang={lang} slot="palco-analise" project="Palco" scene={t('proj.3.scene.analysis')} shape="portrait" className="hero__phone hero__phone--front" priority />
-      </div>
-      <div class="hero__product-caption">
-        <span>Palco</span>
-        <span>{t('hero.caption')}</span>
-      </div>
-    </div>
+  <div class="phones hero__phones">
+    <ProjectVisual lang={lang} slot="palco-gravacao" project="Palco" scene={t('proj.3.scene.recording')} shape="portrait" className="phone phone--low" priority />
+    <ProjectVisual lang={lang} slot="palco-analise" project="Palco" scene={t('proj.3.scene.analysis')} shape="portrait" className="phone" priority />
   </div>
 </section>

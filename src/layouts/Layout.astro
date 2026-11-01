@@ -10,7 +10,7 @@ import { useTranslations } from '../i18n/utils';
 interface Props { title?: string; description?: string; lang?: Lang; }
 const {
   title = 'Anthony Antonelli — iOS Developer',
-  description = 'Anthony Antonelli designs, builds, and ships iPhone apps. Explore Palco, Freela onTap, Rise of the Lich King, odinPedidos, and Boraa.',
+  description = 'Anthony Antonelli designs, builds and ships iPhone apps, and writes the backend behind them. Palco, Freela onTap, Rise of the Lich King, odinPedidos and Boraa.',
   lang = 'en',
 } = Astro.props;
 const t = useTranslations(lang);
@@ -33,7 +33,7 @@ const personSchema = {
   email: 'antonellia.dev@gmail.com',
   address: { '@type': 'PostalAddress', addressLocality: 'Porto Alegre', addressRegion: 'RS', addressCountry: 'BR' },
   affiliation: { '@type': 'CollegeOrUniversity', name: 'Pontifícia Universidade Católica do Rio Grande do Sul (PUCRS)' },
-  knowsAbout: ['Swift', 'SwiftUI', 'UIKit', 'iOS Development', 'React Native', 'TypeScript', 'Node.js'],
+  knowsAbout: ['Swift', 'SwiftUI', 'UIKit', 'iOS Development', 'Vapor', 'Node.js', 'PostgreSQL', 'Python', 'AWS', 'React Native', 'TypeScript'],
   knowsLanguage: ['pt-BR', 'en'],
   sameAs: ['https://github.com/AntonelliAA', 'https://linkedin.com/in/anthony-antonelli-andrade'],
 };
