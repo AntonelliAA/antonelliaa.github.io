@@ -5,15 +5,16 @@ O site não guarda os PDFs. O botão "Baixar currículo" chama a função `cv-do
 A função:
 
 1. só aceita chamadas vindas de `antonelliaa.github.io` e de `localhost:4321`;
-2. confere o formato do e-mail, recusa caixas temporárias e consulta o DNS para ver se o domínio recebe e-mail;
-3. grava o endereço e o idioma em `public.cv_downloads`, no máximo uma linha por endereço e idioma por dia;
-4. devolve um link assinado para o PDF, que vale 2 minutos.
+2. limita cada visitante a 8 pedidos por hora, contados em `public.cv_download_attempts` por um hash do endereço de rede (o endereço em si não é guardado);
+3. confere o formato do e-mail, recusa caixas temporárias e consulta o DNS para ver se o domínio recebe e-mail;
+4. grava o endereço e o idioma em `public.cv_downloads`, no máximo uma linha por endereço e idioma por dia;
+5. devolve um link assinado para o PDF, que vale 2 minutos.
 
 Ela não envia mensagem de confirmação, então não prova que a pessoa é dona do endereço.
 
 ## Arquivos
 
-- `cv-downloads.sql`: a tabela (RLS ligada, sem políticas, sem acesso para `anon` e `authenticated`) e o bucket privado `cv`.
+- `cv-downloads.sql`: as duas tabelas (RLS ligada, sem políticas, sem acesso para `anon` e `authenticated`) e o bucket privado `cv`.
 - `functions/cv-download/index.ts`: a função.
 
 ## Trocar os PDFs

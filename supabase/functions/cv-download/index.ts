@@ -7,7 +7,10 @@ const ORIGINS = new Set(['https://antonelliaa.github.io', 'http://localhost:4321
 const FILES = { pt: 'cv-pt.pdf', en: 'cv-en.pdf' } as const;
 const DOWNLOAD_NAMES = { pt: 'Anthony-Antonelli-CV-PT.pdf', en: 'Anthony-Antonelli-CV-EN.pdf' } as const;
 const LINK_SECONDS = 120;
-const HOURLY_CAP = 120;
+// Each visitor gets a small hourly allowance, so one client cannot use up the service for the rest.
+// The total is only a high backstop.
+const VISITOR_HOURLY_CAP = 8;
+const TOTAL_HOURLY_CAP = 1500;
 // Throwaway inboxes: the address exists for ten minutes and tells me nothing about who asked.
 const DISPOSABLE = new Set([
   'mailinator.com', 'guerrillamail.com', 'guerrillamail.net', 'sharklasers.com', '10minutemail.com', 'tempmail.com',
@@ -39,6 +42,14 @@ async function receivesMail(domain: string): Promise<boolean> {
   return (await dns(domain, 'A')).length > 0;
 }
 
+// The address is never stored: only a salted hash of it, which is enough to count attempts.
+async function visitorHash(request: Request): Promise<string> {
+  const forwarded = request.headers.get('x-forwarded-for') ?? '';
+  const address = request.headers.get('cf-connecting-ip') ?? forwarded.split(',')[0].trim() ?? 'unknown';
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`${secret}:${address}`));
+  return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, '0')).join('').slice(0, 32);
+}
+
 Deno.serve(async (request) => {
   const origin = request.headers.get('origin') ?? '';
   const cors = {
@@ -52,6 +63,28 @@ Deno.serve(async (request) => {
   if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
   if (request.method !== 'POST') return reply(405, { error: 'method' });
   if (!ORIGINS.has(origin)) return reply(403, { error: 'origin' });
+
+  // Every request counts against its visitor, valid or not, before anything else is looked up.
+  const visitor = await visitorHash(request);
+  const hourAgo = new Date(Date.now() - 3_600_000).toISOString();
+  // A fresh builder per query: the client's builders are not meant to be reused.
+  const attempts = () => supabase.from('cv_download_attempts');
+  const [mine, everyone] = await Promise.all([
+    attempts().select('id', { count: 'exact', head: true }).eq('visitor', visitor).gte('created_at', hourAgo),
+    attempts().select('id', { count: 'exact', head: true }).gte('created_at', hourAgo),
+  ]);
+  if (mine.error || everyone.error) {
+    console.error('attempt count failed', mine.error ?? everyone.error);
+    return reply(500, { error: 'server' });
+  }
+  if ((mine.count ?? 0) >= VISITOR_HOURLY_CAP || (everyone.count ?? 0) >= TOTAL_HOURLY_CAP) return reply(429, { error: 'busy' });
+  const { error: attemptError } = await attempts().insert({ visitor });
+  if (attemptError) {
+    console.error('attempt insert failed', attemptError);
+    return reply(500, { error: 'server' });
+  }
+  // Attempts are only useful for an hour; a day is kept and the rest is dropped as requests come in.
+  await attempts().delete().lt('created_at', new Date(Date.now() - 86_400_000).toISOString());
 
   let input: { email?: unknown; lang?: unknown; website?: unknown };
   try {
@@ -73,14 +106,6 @@ Deno.serve(async (request) => {
     // The lookup service being down should not cost a recruiter the CV.
     console.error('dns lookup failed', error);
   }
-
-  const hourAgo = new Date(Date.now() - 3_600_000).toISOString();
-  const { count, error: countError } = await supabase.from('cv_downloads').select('id', { count: 'exact', head: true }).gte('created_at', hourAgo);
-  if (countError) {
-    console.error('count failed', countError);
-    return reply(500, { error: 'server' });
-  }
-  if ((count ?? 0) >= HOURLY_CAP) return reply(429, { error: 'busy' });
 
   // One row per address and language per day, however many times the button is pressed.
   const dayAgo = new Date(Date.now() - 86_400_000).toISOString();
