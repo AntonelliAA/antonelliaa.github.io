@@ -19,10 +19,13 @@ const socialFiles = import.meta.glob('../assets/portfolio-visuals/og-*.{png,jpg,
 const socialName = lang === 'pt-br' ? 'og-pt' : 'og-en';
 const socialImage = Object.entries(socialFiles).find(([path]) => path.split('/').pop()?.replace(/\.[^.]+$/, '') === socialName)?.[1];
 const ogImage = socialImage ? new URL(socialImage.src, Astro.site) : undefined;
-const alternates = [
-  { hreflang: 'en', href: new URL('/', Astro.site) },
-  { hreflang: 'pt-BR', href: new URL('/pt-br/', Astro.site) },
-  { hreflang: 'x-default', href: new URL('/', Astro.site) },
+// A page that exists in both languages sits at the same path, with or without the /pt-br prefix.
+const pagePath = Astro.url.pathname.replace(/^\/pt-br(?=\/|$)/, '') || '/';
+const bilingual = pagePath === '/' || pagePath.startsWith('/case/');
+const alternates = !bilingual ? [] : [
+  { hreflang: 'en', href: new URL(pagePath, Astro.site) },
+  { hreflang: 'pt-BR', href: new URL(`/pt-br${pagePath}`, Astro.site) },
+  { hreflang: 'x-default', href: new URL(pagePath, Astro.site) },
 ];
 const person = {
   '@type': 'Person',

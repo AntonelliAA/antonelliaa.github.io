@@ -1,0 +1,95 @@
+---
+import type { Lang } from '../i18n/ui';
+import { getLocalizedPath } from '../i18n/utils';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+
+// Every claim below was checked against the Palco repository (docs/PROMPTS.md, ADR-013, ADR-014) on 2026-11-11.
+const copy = {
+  en: {
+    back: 'All projects',
+    label: 'Palco, case study',
+    title: 'An LLM inside the iPhone that is not allowed to invent numbers.',
+    intro: 'Palco gives feedback on a rehearsed talk. The speech analysis and the language model both run on the phone. This is how I kept a small model useful, and what I still cannot guarantee.',
+    sections: [
+      { heading: 'The constraint', body: [
+        'In the version on the App Store, nothing a person says leaves the iPhone. Transcription uses SpeechTranscriber, and the written feedback comes from Apple Foundation Models, the language model that ships with iOS.',
+        'That model has a 4,096-token window, shared between what I send and what it writes. A 25-minute rehearsal does not fit.',
+      ] },
+      { heading: 'Numbers come from code', body: [
+        'Pace, filler words and long pauses are counted in Swift, and the same recording always gives the same numbers. The model receives a one-line summary of them, already judged in code: the pace arrives tagged as inside or outside the ideal range, so the model has little room to praise a pace that was too fast.',
+        'The type the model fills in has four text fields and no numeric field. The app cannot show a metric that came from the model, because there is nowhere for one to arrive.',
+      ] },
+      { heading: 'A budget for the context window', body: [
+        'Before each call the app measures the prompt. Under budget, the model gets the whole annotated transcript. Over budget, it gets the first 500 and the last 500 words, with a marker where the middle was removed, so it does not read the cut as a pause.',
+        'If the model still reports that the window overflowed, the app retries once in a new session with 250 words from each end. Each rehearsal gets its own session.',
+      ] },
+      { heading: 'The prompt is versioned like code', body: [
+        'The instructions live in a file in the repository, now at version 0.10, and a prompt change must update that file in the same commit.',
+        'Version 0.10 exists because of one bug. The instructions told the model to write its tip about the focus of the next rehearsal, and carried one fixed example about a filler word. In a take whose focus was long pauses, the model repeated the example\'s filler tip word for word in 2 of 3 runs. A small model copies its example over its rule. The example now changes with the focus.',
+      ] },
+      { heading: 'An instruction is a request, not a guarantee', body: [
+        'Palco must never sound like a diagnosis. The instructions say so, and a filter in code checks every piece of text as it streams and again at the end. If it finds clinical or state-of-mind language about the speaker, the text is discarded and the card shows a short note. The metrics stay on screen.',
+        'Two rules are still enforced by instruction alone: no invented numbers in the prose, and no guessing how an audience reacted. I have not found a way to check either one mechanically, and the documentation says so.',
+      ] },
+      { heading: 'When the phone has no model', body: [
+        'Apple Intelligence needs an iPhone 15 Pro or newer. On older phones Palco writes the four feedback fields with fixed Swift rules that restate the metrics, and labels them as such. If the model is only switched off or still downloading, the app says how to fix that instead.',
+      ] },
+      { heading: 'How it is tested', body: [
+        'The project has 516 tests in Swift Testing. The prompt has 13 written scenarios with pass criteria, from a filler-heavy talk to a transcript too long for the window. They are checked by hand on a physical device, and that round is not finished: the three about the next-rehearsal focus are still pending.',
+      ] },
+    ],
+    store: 'View Palco on the App Store',
+  },
+  'pt-br': {
+    back: 'Todos os projetos',
+    label: 'Palco, estudo de caso',
+    title: 'Um LLM dentro do iPhone que não pode inventar números.',
+    intro: 'O Palco dá retorno sobre uma apresentação ensaiada. A análise da fala e o modelo de linguagem rodam no próprio aparelho. Aqui conto como mantive um modelo pequeno útil, e o que ainda não consigo garantir.',
+    sections: [
+      { heading: 'A restrição', body: [
+        'Na versão que está na App Store, nada do que a pessoa fala sai do iPhone. A transcrição usa o SpeechTranscriber, e o texto do feedback vem do Apple Foundation Models, o modelo de linguagem que acompanha o iOS.',
+        'Esse modelo tem uma janela de 4.096 tokens, dividida entre o que eu envio e o que ele escreve. Um ensaio de 25 minutos não cabe.',
+      ] },
+      { heading: 'Os números vêm do código', body: [
+        'Ritmo, vícios de linguagem e pausas longas são contados em Swift, e a mesma gravação sempre dá os mesmos números. O modelo recebe um resumo deles em uma linha, já avaliado no código: o ritmo chega marcado como dentro ou fora da faixa ideal, o que deixa pouco espaço para o modelo elogiar um ritmo rápido demais.',
+        'O tipo que o modelo preenche tem quatro campos de texto e nenhum campo numérico. O app não consegue mostrar uma métrica vinda do modelo, porque não existe por onde ela chegar.',
+      ] },
+      { heading: 'Um orçamento para a janela de contexto', body: [
+        'Antes de cada chamada, o app mede o prompt. Dentro do orçamento, o modelo recebe a transcrição anotada inteira. Acima dele, recebe as 500 primeiras e as 500 últimas palavras, com um marcador no lugar do trecho removido, para não confundir o corte com uma pausa.',
+        'Se mesmo assim o modelo avisar que a janela estourou, o app tenta mais uma vez, em uma sessão nova, com 250 palavras de cada ponta. Cada ensaio tem a sua própria sessão.',
+      ] },
+      { heading: 'O prompt tem versão, como o código', body: [
+        'As instruções ficam em um arquivo do repositório, hoje na versão 0.10, e uma mudança de prompt precisa atualizar esse arquivo no mesmo commit.',
+        'A versão 0.10 nasceu de um defeito. As instruções mandavam o modelo escrever a dica sobre o foco do próximo ensaio, e traziam um exemplo fixo sobre um vício de linguagem. Em um ensaio cujo foco eram as pausas longas, o modelo repetiu a dica do exemplo, palavra por palavra, em 2 de 3 execuções. Um modelo pequeno copia o exemplo por cima da regra. Agora o exemplo muda conforme o foco.',
+      ] },
+      { heading: 'Instrução é pedido, não garantia', body: [
+        'O Palco nunca pode soar como um diagnóstico. As instruções dizem isso, e um filtro no código confere cada trecho do texto enquanto ele é gerado e de novo no final. Se encontrar linguagem clínica ou sobre o estado emocional de quem fala, o texto é descartado e o cartão mostra uma nota curta. As métricas continuam na tela.',
+        'Duas regras ainda dependem só da instrução: não inventar números no texto e não supor como a plateia reagiu. Não encontrei um jeito de conferir nenhuma das duas por código, e a documentação registra isso.',
+      ] },
+      { heading: 'Quando o aparelho não tem o modelo', body: [
+        'A Apple Intelligence exige um iPhone 15 Pro ou mais novo. Em aparelhos mais antigos, o Palco escreve os quatro campos do feedback com regras fixas em Swift, que repetem as métricas, e identifica o texto como tal. Se o modelo só estiver desligado ou ainda baixando, o app explica como resolver.',
+      ] },
+      { heading: 'Como é testado', body: [
+        'O projeto tem 516 testes em Swift Testing. O prompt tem 13 cenários escritos, com critério de aprovação, de uma fala cheia de vícios a uma transcrição longa demais para a janela. Eles são conferidos à mão em um aparelho físico, e essa rodada não terminou: os três sobre o foco do próximo ensaio ainda estão pendentes.',
+      ] },
+    ],
+    store: 'Ver o Palco na App Store',
+  },
+}[lang];
+---
+
+<article class="case section">
+  <div class="container case__inner">
+    <a class="text-link case__back" href={`${getLocalizedPath(lang)}#palco`}><span aria-hidden="true">‹</span> {copy.back}</a>
+    <p class="eyebrow">{copy.label}</p>
+    <h1 class="display">{copy.title}</h1>
+    <p class="lead">{copy.intro}</p>
+    {copy.sections.map((section) => <section class="case__section">
+      <h2>{section.heading}</h2>
+      {section.body.map((paragraph) => <p>{paragraph}</p>)}
+    </section>)}
+    <a class="text-link" href="https://apps.apple.com/br/app/palco-orat%C3%B3ria-e-apresenta%C3%A7%C3%A3o/id6796434989" target="_blank" rel="noopener noreferrer">{copy.store} <span aria-hidden="true">›</span></a>
+  </div>
+</article>
