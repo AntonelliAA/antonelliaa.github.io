@@ -15,4 +15,4 @@ Um arquivo com o sufixo `.en` (por exemplo `palco-inicio.en.webp`) substitui o a
 
 As telas de celular têm cantos transparentes e mantêm a própria proporção; as peças do Freela são composições completas da App Store. Para trocar uma imagem, exporte com pelo menos 900 px de largura, mantenha o nome e gere o site novamente. Remova dados pessoais, falas privadas, pedidos e candidaturas reais antes de adicionar capturas novas.
 
-Para a prévia de compartilhamento, também podem ser adicionados `og-pt` e `og-en` (1200 × 630 px).
+A prévia de compartilhamento usa `og-pt.jpg` e `og-en.jpg` (1200 × 630 px), montadas com o título da abertura e as telas Início e Histórico do Palco.

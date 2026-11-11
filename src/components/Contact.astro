@@ -17,7 +17,7 @@ const t = useTranslations(lang);
     <ul class="contact__links">
       <li><a class="text-link" href="https://linkedin.com/in/anthony-antonelli-andrade" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">›</span></a></li>
       <li><a class="text-link" href="https://github.com/AntonelliAA" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">›</span></a></li>
-      <li><a class="text-link" href="/resume/cv.pdf" download="Anthony_Antonelli_CV.pdf">{t('hero.cta.cv')} <span aria-hidden="true">›</span></a></li>
+      <li><a class="text-link" href={`/resume/cv-${lang === 'pt-br' ? 'pt' : 'en'}.pdf`} download={`Anthony-Antonelli-CV-${lang === 'pt-br' ? 'PT' : 'EN'}.pdf`}>{t('hero.cta.cv')} <span aria-hidden="true">›</span></a></li>
     </ul>
   </div>
 </section>
