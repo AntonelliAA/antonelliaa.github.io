@@ -1,0 +1,10 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import PalcoCaseStudy from '../../../components/PalcoCaseStudy.astro';
+
+const lang = 'pt-br' as const;
+---
+
+<Layout lang={lang} title="Estudo de caso do Palco | Anthony Antonelli" description="Como o Palco roda um modelo de linguagem no iPhone: métricas no código, orçamento de contexto, prompt versionado e filtro de segurança.">
+  <PalcoCaseStudy lang={lang} />
+</Layout>

@@ -4,6 +4,9 @@ import { useTranslations } from '../i18n/utils';
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+// The PDFs are not in the site: the cv-download function (supabase/functions) checks the email,
+// records it, and answers with a short-lived link.
+const endpoint = 'https://yjhyxryxnzhsmyizimma.supabase.co/functions/v1/cv-download';
 ---
 
 <section class="contact section" id="contact" aria-labelledby="contact-title">
@@ -17,7 +20,77 @@ const t = useTranslations(lang);
     <ul class="contact__links">
       <li><a class="text-link" href="https://linkedin.com/in/anthony-antonelli-andrade" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">›</span></a></li>
       <li><a class="text-link" href="https://github.com/AntonelliAA" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">›</span></a></li>
-      <li><a class="text-link" href={`/resume/cv-${lang === 'pt-br' ? 'pt' : 'en'}.pdf`} download={`Anthony-Antonelli-CV-${lang === 'pt-br' ? 'PT' : 'EN'}.pdf`}>{t('hero.cta.cv')} <span aria-hidden="true">›</span></a></li>
+      <li><button class="text-link cv__toggle" type="button" aria-expanded="false" aria-controls="cv-form">{t('hero.cta.cv')} <span aria-hidden="true">›</span></button></li>
     </ul>
+    <form
+      class="cv" id="cv-form" hidden novalidate
+      data-endpoint={endpoint}
+      data-lang={lang === 'pt-br' ? 'pt' : 'en'}
+      data-sending={t('cv.sending')}
+      data-done={t('cv.done')}
+      data-error-invalid={t('cv.error.invalid')}
+      data-error-domain={t('cv.error.domain')}
+      data-error-disposable={t('cv.error.disposable')}
+      data-error-server={t('cv.error.server')}
+    >
+      <label class="cv__label" for="cv-email">{t('cv.label')}</label>
+      <div class="cv__row">
+        <input class="cv__input" id="cv-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" required aria-describedby="cv-status cv-note" />
+        <input class="cv__trap" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <button class="button" type="submit">{t('cv.submit')}</button>
+      </div>
+      <p class="cv__status" id="cv-status" role="status" aria-live="polite"></p>
+      <p class="cv__note" id="cv-note">{t('cv.note')}</p>
+    </form>
   </div>
 </section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#cv-form');
+  const toggle = document.querySelector<HTMLButtonElement>('.cv__toggle');
+  if (form && toggle) {
+    const input = form.querySelector<HTMLInputElement>('#cv-email')!;
+    const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const status = form.querySelector<HTMLElement>('.cv__status')!;
+    const say = (text: string, failed = false) => {
+      status.textContent = text;
+      status.classList.toggle('cv__status--error', failed);
+      input.setAttribute('aria-invalid', String(failed));
+    };
+
+    toggle.addEventListener('click', () => {
+      const open = form.hidden;
+      form.hidden = !open;
+      toggle.setAttribute('aria-expanded', String(open));
+      if (open) input.focus();
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const email = input.value.trim();
+      // The server decides what is valid; this only spares a round trip for the obvious cases.
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return say(form.dataset.errorInvalid!, true);
+      submit.disabled = true;
+      say(form.dataset.sending!);
+      try {
+        const response = await fetch(form.dataset.endpoint!, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ email, lang: form.dataset.lang, website: new FormData(form).get('website') }),
+        });
+        const body = await response.json();
+        if (response.ok && body.url) {
+          say(form.dataset.done!);
+          window.location.assign(body.url);
+        } else {
+          const known = { invalid: form.dataset.errorInvalid, domain: form.dataset.errorDomain, disposable: form.dataset.errorDisposable } as Record<string, string | undefined>;
+          say(known[body.error] ?? form.dataset.errorServer!, true);
+        }
+      } catch {
+        say(form.dataset.errorServer!, true);
+      } finally {
+        submit.disabled = false;
+      }
+    });
+  }
+</script>
