@@ -9,7 +9,7 @@ import { useTranslations } from '../i18n/utils';
 
 interface Props { title?: string; description?: string; lang?: Lang; }
 const {
-  title = 'Anthony Antonelli — iOS Developer',
+  title = 'Anthony Antonelli | iOS Developer and Software Engineer',
   description = 'Anthony Antonelli designs, builds and ships iPhone apps, and writes the backend behind them. Palco, Freela onTap, Rise of the Lich King, odinPedidos and Boraa.',
   lang = 'en',
 } = Astro.props;
@@ -24,9 +24,9 @@ const alternates = [
   { hreflang: 'pt-BR', href: new URL('/pt-br/', Astro.site) },
   { hreflang: 'x-default', href: new URL('/', Astro.site) },
 ];
-const personSchema = {
-  '@context': 'https://schema.org',
+const person = {
   '@type': 'Person',
+  '@id': `${Astro.site?.href}#anthony`,
   name: 'Anthony Antonelli Andrade',
   url: Astro.site?.href,
   jobTitle: 'iOS Developer',
@@ -37,6 +37,13 @@ const personSchema = {
   knowsLanguage: ['pt-BR', 'en'],
   sameAs: ['https://github.com/AntonelliAA', 'https://linkedin.com/in/anthony-antonelli-andrade'],
 };
+// The apps that are live on the App Store today, so a search for one of them can lead back here.
+const apps = [
+  { name: 'Palco', url: 'https://apps.apple.com/br/app/palco-orat%C3%B3ria-e-apresenta%C3%A7%C3%A3o/id6796434989', applicationCategory: 'EducationApplication' },
+  { name: 'Rise of the Lich King', url: 'https://apps.apple.com/br/app/rise-of-the-lich-king/id6760662821', applicationCategory: 'GameApplication' },
+  { name: 'odinPedidos', url: 'https://apps.apple.com/br/app/odin-pedidos/id6755982771', applicationCategory: 'BusinessApplication' },
+].map((app) => ({ '@type': 'SoftwareApplication', operatingSystem: 'iOS', author: { '@id': person['@id'] }, ...app }));
+const schema = { '@context': 'https://schema.org', '@graph': [person, ...apps] };
 ---
 <!doctype html>
 <html lang={lang === 'pt-br' ? 'pt-BR' : 'en'}>
@@ -61,9 +68,13 @@ const personSchema = {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     {ogImage && <meta name="twitter:image" content={ogImage} />}
+    <meta name="theme-color" content="#fbfbfd" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>{title}</title>
-    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} is:inline />
+    <script is:inline>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');</script>
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
     <Clarity />
   </head>
   <body>
@@ -71,5 +82,6 @@ const personSchema = {
     <Header lang={lang} />
     <main id="main"><slot /></main>
     <Footer lang={lang} />
+    <script>import '../scripts/motion.ts';</script>
   </body>
 </html>

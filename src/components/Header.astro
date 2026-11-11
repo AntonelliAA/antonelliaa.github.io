@@ -6,6 +6,8 @@ interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const other: Lang = lang === 'en' ? 'pt-br' : 'en';
+// The sections live on the home page, so the links carry its path and still work from 404 and other pages.
+const home = getLocalizedPath(lang);
 const nav = [
   { key: 'nav.projects' as const, href: '#projects' },
   { key: 'nav.ai' as const, href: '#agents' },
@@ -20,7 +22,7 @@ const nav = [
   <div class="container site-header__inner">
     <a class="site-header__name" href={getLocalizedPath(lang)} aria-label={t('a11y.home')}>Anthony Antonelli</a>
     <nav class="site-nav" id="site-nav" aria-label={t('a11y.nav')}>
-      {nav.map((item) => <a href={item.href}>{t(item.key)}</a>)}
+      {nav.map((item) => <a href={`${home}${item.href}`}>{t(item.key)}</a>)}
       <a class="site-nav__language" href={getLocalizedPath(other)} hreflang={other === 'pt-br' ? 'pt-BR' : 'en'} lang={other === 'pt-br' ? 'pt-BR' : 'en'} aria-label={t('a11y.language')}>{t('nav.language')}</a>
     </nav>
     <button class="menu-toggle" type="button" aria-label={t('a11y.menu.open')} data-open-label={t('a11y.menu.open')} data-close-label={t('a11y.menu.close')} aria-controls="site-nav" aria-expanded="false">
